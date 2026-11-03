@@ -1,532 +1,180 @@
-# Docker Full-Stack Example
+# Vaatimusmäärittely: Web-Ohjelmoinnin Sovellusprojekti Ryhmä 6
+
+**Versio:** 0.1  
+**Päivämäärä:** 28.10.2026  
+**Laatija:** Mikko Väisänen, Atte Paaso, Joni Ylimartimo, Janne Hietanen, Jaakko Paitsola <br>
+**Tila:** Ensimmäinen versio, odottaa asiakkaan hyväksyntää
 
-This project is a beginner-friendly example of running a full-stack application with **Docker Compose**.
+## 1. Tausta ja tavoite
 
-It contains three services:
+Elokuvaharrastajien on vaikea kokoontua yhteen ja organisoida keskustelua elokuvista. Elokuvasuositukset hukkuvat ja kukaan ei muista mitä oli sovittu katsottavaksi, ja tapahtuman tietoja on vaikea etsiä ja/tai muistella.
 
-- **Frontend** — React + Vite
-- **Backend** — Node.js + Express
-- **Database** — PostgreSQL
+**Tavoite:** Elokuvaharrastajat voivat järjestäytyä ryhmiin, tehdä arvosteluja elokuvista, lisätä suosikkeja tai 'katseltavaksi myöhemmin' backlogiin elokuvia, ja keskustella elokuvista.
 
-```text
-Browser
-   │
-   ▼
-Frontend :5173
-   │
-   ▼
-Backend :3000
-   │
-   ▼
-PostgreSQL :5432
-```
+**Onnistumisen mittarit (sovittava asiakkaan kanssa):**
+- (TBA)
+- (TBA)
+- Sovellusta voidaan käyttää puhelimen selaimessa ilman erillistä asennusta.
 
-Docker Compose starts and connects all three services.
+## 2. Käyttäjät ja roolit
 
----
+| Rooli | Tarve | Oikeudet |
+|---|---|---|
+| Vierailija | Selata elokuvia, jaettuja listoja ja julkisia ryhmiä ja arvosteluja | Katsella elokuvien tietoa ja julkiseksi merkittyjä arvosteluja. |
+| Käyttäjä | Vierailijan tarpeet, ryhmien tekeminen sekä niihin liittyminen ja arvosteluiden tekeminen | Sama kuin vierailijalla, lisänä arvosteluihin liittyvien tietojen lisäys ja muokkaus. Ryhmien tekemiseen vaadittavien tietojen lisääminen. |
+| Ryhmän ylläpitäjä | Suunnitella ja ylläpitää ryhmiä.  | Ryhmänhallinta, oikeus poistaa sopimattomia arvosteluita ryhmän sisällä. |
+| Sivuston ylläpitäjä | Hallita sivustoa ja ylläpitää yhteisöä.  | Koko sivuston ylläpito |
 
-## Requirements
+**Sovelluksen rajaus:** Sovellus palvelee aluksi pieniä harrastusryhmiä. Käyttäjätunnukset luodaan rekisteröinnillä. Jatkokehitysideana on laajentaa palvelualuetta koko Suomen elokuvayhteisölle tai jopa kansainväliseksi. Kaupallinen toiminta mahdollista tulevaisuudessa.
 
-Install:
+## 3. Käyttötilanne
 
-- Git
-- Docker Desktop
+### Vieras
+1. Vierailija saapuu sivustolle.
+2. Vierailijalle esitetään elokuvavalikoima.
+3. Vierailija pystyy hakemaan haluamiaan elokuvia.
+4. Vierailija pystyy lukemaan muiden julkiseksi asetettuja arvosteluita.
+5. Vierailija voi halutessaan rekisteröityä ja kirjautua sivustolle.
 
-### Important: start Docker Desktop
+### Käyttäjä
+1. Käyttäjä kirjautuu sivustolle.
+2. Käyttäjälle esitetään elokuvavalikoima.
+3. Käyttäjä pystyy hakemaan halumiaan elokuvia.
+4. Käyttäjä pystyy perustamaan ryhmiä ja tehdä elokuvalistoja.
+5. Käyttäjä pystyy lukemaan muiden julkiseksi asetettuja arvosteluita.
+6. Käyttäjä pystyy lukemaan muiden ryhmäläisten arvosteluita.
+7. Käyttäjä pystyy tekemään omia arvosteluita.
+8. Käyttäjä pystyy löytämään ja lähettämään liittymispyyntöjä ryhmille.
 
-Docker Desktop must be running before you use Docker commands.
+### Ryhmän ylläpitäjä
+1. Ryhmän ylläpitäjä on käyttäjä, joka voi vastata ryhmän liittymispyyntöihin.
+2. Ryhmän ylläpitäjä voi poistaa käyttäjiä ryhmästä.
+3. Ryhmän ylläpitäjä voi antaa ylläpitöoikeuksia muille ryhmäläisille, tai poistaa ryhmän.
 
-You can check it with:
+## 4. Toiminnalliset vaatimukset
 
-```bash
-docker version
-```
+Jokaisella vaatimuksella on yksilöllinen tunniste. **Must** tarkoittaa ensimmäisen käyttökelpoisen version kannalta välttämätöntä, **Should** tärkeää mutta lykättävissä olevaa ja **Could** mahdollista lisäominaisuutta.
 
-You should see information about both **Client** and **Server**.
+| ID | Vaatimus | Prioriteetti |
+|---|---|---|
+| FR-01 | Kuka tahansa sivustolle päästyään voi nähdä elokuvalistauksen. | Must |
+| FR-02 | Elokuvan tiedoissa näytetään nimi, julkaisuvuosi, kuvaus, esiintyjät, ohjaaja ja arvostelut. | Must |
+| FR-03 | Käyttäjä voi hakea elokuvia elokuvan nimen, näyttelijän, ohjaajaan ja aikakauden mukaan. | Must |
+| FR-04 | Käyttäjä voi rekisteröityä ja kirjautua palveluun. | Must |
+| FR-05 | Käyttäjä voi luoda ryhmän. | Must |
+| FR-06 | Käyttäjä voi lähettää liittymispyynnön haluttuihin ryhmiin. | Must |
+| FR-07 | Käyttäjä voi kirjoittaa arvostelun elokuvasta. | Must |
+| FR-08 | Käyttäjä voi kirjautua omalla tunnuksellaan ja salasanallaan. | Must |
+| FR-09 | Ryhmän tapahtuvat ovat nähtävillä ryhmän jäsenille. | Must |
+| FR-10 | Eritasoisia ylläpito-oikeuksia käyttäjille. | Must |
+| FR-11 | Käyttäjä voi luoda ja jakaa elokuvalistoja. | Must |
+| FR-12 | Ryhmän sisäinen chat-toiminto. | Must |
+| FR-13 | Elokuvateattereitten näytöstiedot | Could |
 
-If Windows shows an error similar to:
+### 4.1 Tarkemmat hyväksymiskriteerit: FR-03 (ilmoittautuminen)
 
-```text
-open //./pipe/dockerDesktopLinuxEngine:
-The system cannot find the file specified.
-```
+### 4.2 Tarkemmat hyväksymiskriteerit: FR-06 (tapahtuman luonti)
 
-start Docker Desktop and wait until Docker is running.
+## 5. Ei-toiminnalliset vaatimukset
 
----
+Numeeriset rajat ovat **esimerkkitavoitteita**, jotka tulee oikeassa projektissa sopia asiakkaan kanssa ja testata.
 
-## Get the project
+| ID | Vaatimus | Todentaminen |
+|---|---|---|
+| NFR-01 |Skaalautuvuus mobiililaitteille|Toimiva mobiilisovellus|
+| NFR-02 |Tietoturva|Autentikointi|
+| NFR-03 | Salasanat tallennetaan vain turvallisella yksisuuntaisella salasanatiivisteellä. | Toteutuksen ja tietokannan tarkistus |
+| NFR-04 | Käyttäjä ei voi hakea tai muuttaa toisen käyttäjän tietoja ilman roolinsa mukaista oikeutta. | API:n käyttöoikeustestit |
+| NFR-05 | Sovellusta käytetään tuotantoympäristössä HTTPS-yhteydellä. | Julkaistun osoitteen tarkistus |
+| NFR-06 | Fiksu ulkoasu | Asiakkaan hyväksymä ulkoasu |
 
-If you only want to try the Docker example, you can clone the repository normally:
+## 6. Tiedot ja alustava tietomalli
 
-```bash
-git clone https://github.com/OAMK-advanced-web-applications-project/docker_sample.git
-cd docker_sample
-```
+Sovellus tallentaa vähintään seuraavat tiedot:
 
-### Using the example as a starting point for your own project
+- **Käyttäjä:** tunniste, nimi, sähköposti, salasanatiiviste ja rooli.
+- **Ryhmä:** Jäsenet, nimi, arvostelut, ja elokuvalistat.
+- **Arvostelu:** Arvosana, arvostelija, päivämäärä ja elokuva.
 
-If you use this example as the starting point for your **own course project**, you should create your own Git repository.
+Sovellus käyttää The Movie Databasen tietokantaa lähteenä elokuvien tiedoille
 
-If you simply clone this repository, Git still remembers the original repository as its remote (`origin`). Instead, clone the example, remove its Git history, and initialize a new repository for your own project.
+Tarkempi ER-kaavio tehdään erilliseen tietokantasuunnitelmaan.
 
-First clone the example:
+## 7. Projektin rajaus
 
-```bash
-git clone https://github.com/OAMK-advanced-web-applications-project/docker_sample.git
-cd docker_sample
-```
+**Ensimmäiseen julkaisuun (MVP) sisältyvät:** Elokuvien ja arvostelujen näyttäminen. Käyttäjätilin luominen ja tallentaminen. Sisäänkirjautuminen. Arvostelujen tekeminen. Elokuvalistojen tekeminen sekä jakaminen. Käyttöliittymän toimivuus puhelimessa ja julkaisu Azureen kuuluvat myös valmiin tuotteen vaatimuksiin.
 
-You can also rename the project directory to match your own project.
+**Ei toteuteta tässä kahdeksan viikon projektissa:** maksut, kansainväliseksi laajentaminen, tekoäly-agenttien käyttäminen sovelluksessa.
 
-Then remove the existing `.git` directory.
+Rajaus ja Must-prioriteetit hyväksytetään asiakkaalla. Niitä voidaan muuttaa, kun toteutuksen työmäärä tarkentuu.
 
-### Windows PowerShell
+## 8. Toteutusjärjestys ja alustava viikkosuunnitelma
 
-```powershell
-Remove-Item -Recurse -Force .git
-```
+Tämä on **esimerkkisuunnitelma**, ei asiakkaan hyväksymä aikataulu. Ensimmäinen arvo syntyy, kun tapahtumia voi nähdä ja ilmoittautua niihin; tekniset riippuvuudet, kuten tunnistautuminen, toteutetaan hallitusti tämän ympärille.
 
-### Windows Command Prompt
+| Viikko | Tavoite ja näytettävä tulos |
+|---|---|
+| 1 | Vaatimukset, tietokantasuunnitelma, backlog ja ensimmäinen Azure-julkaisu hyväksyttyyn pohjaan |
+| 2 | Julkaistussa sovelluksessa näkyy oikeasta tietokannasta haettu elokuvalista. Rekisteröinti ja sisäänkirjautuminen toimii. |
+| 3 | Rekisteröinti ja sisäänkirjautuminen toimii. |
+| 4 | Ryhmien luonti ja jäsenten lisääminen niihin. |
+| 5 | Arvostelujen tekeminen |
+| 6 | Elokuvalistat ja niiden jakaminen |
+| 7 | Viimeistely, dokumentit, testaus ja tuotantoversion vakauttaminen |
+| 8 | Loppuesitys ja toimivan julkaistun sovelluksen esittely |
 
-```cmd
-rmdir /s /q .git
-```
+**Huom.** Varhaisissa demoissa voidaan käyttää rajattua testikäyttäjää tai testitunnistusta. Oikeat käyttöoikeudet ja turvallisuusvaatimukset on toteutettava ennen todellisten käyttäjien käyttöönottoa.
 
-### Linux/macOS
+## 9. Definition of Done – milloin vaatimus on valmis?
 
-```bash
-rm -rf .git
-```
+Vaatimusta ei merkitä valmiiksi vain siksi, että se toimii kehittäjän omalla koneella. Valmis ominaisuus täyttää kaikki seuraavat ehdot:
 
-> **Be careful:** make sure you are inside the correct project directory before removing `.git`.
+- [ ] Toteutus vastaa hyväksyttyjä vaatimuksia ja hyväksymiskriteerejä.
+- [ ] Koodi on GitHubissa, katselmoitu ja yhdistetty yhteiseen haaraan.
+- [ ] Tarvittavat automaattiset testit menevät läpi.
+- [ ] Ominaisuus toimii oikean palvelimen ja tietokannan kanssa.
+- [ ] Ominaisuus on julkaistu Azureen ja testattu julkaistusta osoitteesta.
+- [ ] Tiimi osaa esitellä ja selittää toteutuksen.
+- [ ] Tarvittava dokumentaatio on päivitetty.
+- [ ] Koodi menee lintteristä läpi.
 
-The project files are still there, but the connection to the original Git repository and its Git history have now been removed.
+**Esimerkiksi:** FR-01 on valmis vasta, kun sovelluksen auetessa esitetään elokuvalista.
 
-Initialize a new Git repository:
+## 10. Avoimet kysymykset ja oletukset
 
-```bash
-git init
-git add .
-git commit -m "Initial project"
-```
+| ID | Kysymys asiakkaalle | Tila |
+|---|---|---|
+| Q-01 | Halutaanko käyttäjärooleihin koko sivuston ylläpitäjä, ja kuinka laajat oikeudet ylläpitäjälle halutaan? | Ratkaistu: Ei tarvi |
+| Q-02 | Mitä tietoja käyttäjältä kysytään ja tallennetaan rekisteröitymisen yhteydessä? | Avoin: Selvittäkää tarvitaanko tietosuojakäytäntöä. Nimimerkki ja sähköposti |
+| Q-03 | Mitä vapaaehtoisia tunnistetietoja käyttäjä voi asettaa itselleen? Esimerkiksi: Voiko käyttäjä valita lempi elokuvakategoriat, jolloin asiakkaalle voidaan suositella siihen liittyviä elokuvia. | Avoin |
+| Q-04 | Voiko käyttäjä arvostella elokuvan jättämättä kommenttia? | Ratkaistu: Kyllä voi, ja arvostelu jättää aikamerkin |
+| Q-05 | Voiko ryhmällä olla useita ylläpitäjiä? | Ratkaistu: Ryhmällä voi olla useampi ylläpitäjä. |
+| Q-06 | Onko sovelluksessa tarkoitus olla kaverilistaa? | Ratkaistu: Ryhmät toimivat kaverilistoina. |
+| Q-07 | Halutaanko muokattavaa käyttäjäprofiilia? | Ratkaistu: Yksinkertainen käyttäjäprofiili vaaditaan, mutta esim. suosikkigenrejä ei tarvitse olla profiilissa. Olisi suotavaa, että sovellus osaa suositella käyttäjälle sen makuprofiiliin sopivia elokuvia, mutta tämän implementaatio on vielä avoinna. |
 
-Create a new empty repository for your project on GitHub.
+## 11. Hyväksyntä ja muutosten hallinta
 
-Then connect your local project to your new GitHub repository:
+Vaatimusmäärittely käydään asiakkaan kanssa läpi **ennen varsinaisen toteutuksen etenemistä**. Hyväksynnässä tarkistetaan erityisesti tavoitteet, ensimmäisen version rajaus, Must-vaatimukset ja avoimet kysymykset.
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-git branch -M main
-git push -u origin main
-```
+| Kenttä | Arvo |
+|---|---|
+| Asiakkaan edustaja | _________________________ |
+| Hyväksytty versio | _________________________ |
+| Hyväksynnän päivämäärä | _________________________ |
+| Mahdolliset ehdot | _________________________ |
 
-Replace `YOUR_USERNAME` and `YOUR_REPOSITORY` with your own GitHub username and repository name.
+Muutokset kirjataan dokumentin versiohistoriaan ja GitHubin backlogiin. Asiakas ja tiimi arvioivat yhdessä niiden vaikutuksen aikatauluun ja prioriteetteihin.
 
-You can verify the configured remote with:
+## 12. Versiohistoria
 
-```bash
-git remote -v
-```
+| Versio | Päivä | Muutos |
+|---|---|---|
+| 0.1 | 28.10.2026 | Alustava vaatimusmäärittely |
 
-It should now show **your own repository**, not the original `docker_sample` repository.
-
-### Alternative: fork the repository
-
-Another possibility is to **fork** this repository on GitHub and then clone your fork.
-
-A fork keeps the Git history and the relationship to the original repository. This can be useful when you want to continue following changes made to the original project.
-
-For this course project, creating a fresh Git repository using the instructions above is usually simpler.
-
----
-
-## Create `.env`
-
-The repository contains:
-
-```text
-.env.example
-```
-
-Create your own `.env` file from it.
-
-### Option 1: File Explorer
-
-This may be easiest if you are not comfortable using the terminal.
-
-1. Open the project folder in File Explorer.
-2. Make a copy of `.env.example`.
-3. Rename the copy to:
-
-```text
-.env
-```
-
-Make sure the file is really named `.env` and not something like:
-
-```text
-.env.txt
-```
-
-### Option 2: Windows PowerShell
-
-```powershell
-Copy-Item .env.example .env
-```
-
-### Option 3: Windows Command Prompt
-
-```cmd
-copy .env.example .env
-```
-
-### Option 4: Linux/macOS
-
-```bash
-cp .env.example .env
-```
-
-The project should now contain both:
-
-```text
-.env.example
-.env
-```
-
-`.env.example` is stored in Git as an example configuration.
-
-`.env` is your local configuration file and should **not** be committed to Git.
-
----
-
-## Start the application
-
-Make sure Docker Desktop is running.
-
-Then run:
-
-```bash
-docker compose up --build
-```
-
-The first start may take some time because Docker needs to download images and install dependencies.
-
-When the services have started, open:
-
-```text
-Frontend: http://localhost:5173
-Backend:  http://localhost:3000
-Health:   http://localhost:3000/api/health
-```
-
----
-
-## Check container status
-
-Open another terminal in the project directory and run:
-
-```bash
-docker compose ps
-```
-
-You should see three services:
-
-```text
-frontend
-backend
-database
-```
-
-The `backend` and `database` services should eventually show as healthy.
-
----
-
-## How the containers communicate
-
-The backend connects to PostgreSQL using:
-
-```text
-database:5432
-```
-
-not:
-
-```text
-localhost:5432
-```
-
-Inside Docker Compose, the service name `database` acts as the hostname.
-
-From your own computer, PostgreSQL is available at:
-
-```text
-localhost:5432
-```
-
-For example, pgAdmin can use:
-
-```text
-Host: localhost
-Port: 5432
-Database: mydb
-Username: postgres
-Password: root
-```
-
----
-
-## Stop the application
-
-Stop and remove the containers:
-
-```bash
-docker compose down
-```
-
-The PostgreSQL data remains stored in a Docker volume.
-
-To also delete the database volume:
-
-```bash
-docker compose down -v
-```
-
-Be careful: `-v` deletes the database data.
-
----
-
-## View logs
-
-All services:
-
-```bash
-docker compose logs
-```
-
-Backend:
-
-```bash
-docker compose logs backend
-```
-
-Database:
-
-```bash
-docker compose logs database
-```
-
-Follow logs continuously:
-
-```bash
-docker compose logs -f
-```
-
----
-
-## Common problems
-
-### Docker cannot connect
-
-Make sure Docker Desktop is running.
-
-Check:
-
-```bash
-docker version
-```
-
-You should see both Client and Server information.
-
----
-
-### A service does not start
-
-Check the status of the services:
-
-```bash
-docker compose ps
-```
-
-Then inspect the logs:
-
-```bash
-docker compose logs
-```
-
-For example:
-
-```bash
-docker compose logs backend
-```
-
-or:
-
-```bash
-docker compose logs database
-```
-
----
-
-### PostgreSQL port 5432 is already in use
-
-If you already have PostgreSQL installed on your computer, it may already be using port `5432`.
-
-Docker cannot use the same host port at the same time.
-
-You have three options.
-
-#### Option 1: Stop PostgreSQL using Windows Services
-
-1. Open the Start menu.
-2. Search for **Services**.
-3. Open the **Services** application.
-4. Look for a PostgreSQL service, for example:
-
-```text
-postgresql-x64-17
-postgresql-x64-18
-```
-
-The exact name depends on the installed PostgreSQL version.
-
-5. Right-click the PostgreSQL service.
-6. Select **Stop**.
-
-After that, start the Docker application again:
-
-```bash
-docker compose up
-```
-
-You can start your local PostgreSQL service again later from the same Services application.
-
-#### Option 2: Stop PostgreSQL from the terminal
-
-First, find the PostgreSQL service name.
-
-In PowerShell:
-
-```powershell
-Get-Service *postgres*
-```
-
-You should see something similar to:
-
-```text
-Status   Name                DisplayName
-------   ----                -----------
-Running  postgresql-x64-18   postgresql-x64-18
-```
-
-Then stop the service:
-
-```powershell
-Stop-Service postgresql-x64-18
-```
-
-Replace `postgresql-x64-18` with the actual service name shown on your computer.
-
-If PowerShell reports a permission error, open **PowerShell as Administrator** and try again.
-
-You can start PostgreSQL again later with:
-
-```powershell
-Start-Service postgresql-x64-18
-```
-
-Alternatively, from an **Administrator Command Prompt** you can use:
-
-```cmd
-net stop postgresql-x64-18
-```
-
-and start it again with:
-
-```cmd
-net start postgresql-x64-18
-```
-
-#### Option 3: Use another host port
-
-Instead of stopping your locally installed PostgreSQL, change this in `.env`:
-
-```env
-DB_EXPOSED_PORT=5432
-```
-
-to:
-
-```env
-DB_EXPOSED_PORT=5433
-```
-
-Then restart the Docker application:
-
-```bash
-docker compose down
-docker compose up
-```
-
-PostgreSQL inside Docker still listens on port:
-
-```text
-5432
-```
-
-but from your computer you now connect to:
-
-```text
-localhost:5433
-```
-
-For example, pgAdmin would use:
-
-```text
-Host: localhost
-Port: 5433
-Database: mydb
-Username: postgres
-Password: root
-```
-
-The backend does **not** need to change.
-
-It still connects to:
-
-```text
-database:5432
-```
-
-because the containers communicate through Docker's internal network.
-
----
-
-### I changed `init.sql`, but nothing changed
-
-`init.sql` is normally executed only when PostgreSQL creates a new database volume.
-
-To create a fresh database:
-
-```bash
-docker compose down -v
-docker compose up
-```
-
-**Warning:** this deletes the existing Docker database data.
-
----
-
-## Basic Docker concepts used in this example
-
-- **Dockerfile** — instructions for building an image
-- **Image** — template used to create containers
-- **Container** — running application environment
-- **Docker Compose** — manages multiple containers
-- **Port mapping** — exposes a container service to your computer
-- **Volume** — stores persistent data
-- **Bind mount** — makes local source files available inside a container
-- **Healthcheck** — checks whether a service is ready
-- **Service name** — allows containers to find each other, for example `database`
-
-More detailed explanations and exercises are provided separately in the course material.
+## Scrum-tiimi ja työskentelytavat
+ - Product Owner: Jouni Juntunen
+ - Scrum Master: Vaihtelee viikottain kehittäjien kesken
+ - Kehittäjät: Joni Ylimartamo, Jaakko Paitsola, Mikko Väisänen, Janne Hietanen ja Atte Paaso
+ - Sprintin pituus: 1 viikko
+ - Definition of Done: [Definition of Done](https://github.com/Jakespakes/Websovellus-projekti/tree/main/docs/definition-of-done.md)
+ 
