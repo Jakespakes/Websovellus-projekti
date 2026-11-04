@@ -30,7 +30,7 @@ export default function MovieList() {
 
   return (
     <>
-      <h1>Elokuva kortit</h1>
+      <h1 className='movieTitle'>Elokuva kortit</h1>
       <div className="card">
         {loading && <p>Loading...</p>}
         
