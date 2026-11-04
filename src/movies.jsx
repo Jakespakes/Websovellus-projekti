@@ -16,9 +16,9 @@ export default function Movies() {
 // Main idea is that the Frontend sends a request to the backend, which then sends a request to TMDB, getting movie info as a JSON thats then sent here, parsed into an array-
 // And presented onto the screen. 
     try {
-      const response = await axios.get('/movies') //Sends a GET request to the Backend Server. I
-      setData(response.data)
-      console.log('Response:', response.data)
+      const response = await axios.get('http://localhost:3000/movies') //Sends a GET request to the Backend Server. It has to be in THIS format, '/movies' doesn't work and I don't know why.
+      setData(response.data)// As an addendum to the above, TMDB is empty as for now! I COULD try and work the API Fetch to be independent from App.js but that would take too much time as of now, maybe next week or later!
+      console.log('Response:', response.data) //Devtool to see what the Backend is sending me.
     } catch (err) {
       setError(err.message)
     } finally {
@@ -31,10 +31,14 @@ export default function Movies() {
     
   }, []) //Upon first loading the page, activates the fetchData function as seen above.
 
+
+  // Incredibly basic, we should take a look later to see what our customer needs as info, and what would be the 'proper' GET command to pull this info from. 
+  // BUT! The most MOST important thing is that the logic is there to begin with! 
+  // As now that I have the proper stuff down to begin with its way easier to modify it to work with different endpoints and to show different data than to work from nothing! (hopefully.)
   return (
     <div>
       <h1>Movies</h1>
-
+    
       <div>
         {data.map((movie) => (
           <div key={movie.id}>
@@ -49,7 +53,6 @@ export default function Movies() {
               <h2>{movie.title}</h2>
               <p>{movie.overview}</p>
             </div>
-
           </div>
         ))}
       </div>
