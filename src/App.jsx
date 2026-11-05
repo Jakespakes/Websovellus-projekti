@@ -1,20 +1,16 @@
-import { useState } from 'react'
 import MovieList from './components/MovieList'
 import Navbar from './components/NavBar'
 
-
-
 function App() {
-
   return (
     <>
-  <header>
-  <Navbar/>
-  </header>
+      <header>
+        <Navbar/>
+      </header>
 
-  <main>
-  <MovieList/>
-  </main>
+      <main>
+        <MovieList/>
+      </main>
     </>
   )
 }
