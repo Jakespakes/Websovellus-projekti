@@ -1,36 +1,66 @@
 import React from 'react'
-import "./NavBar.css" 
+import "./NavBar.css"
 
 
-export default function Navbar() {
+export default function NavBar() {
   return (
-    <nav className="navbar md:navbar-expand bg-1">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="/">Navbar</a>
-    <button className="btn-icon navbar-toggler" type="button" data-bs-toggle="drawer" data-bs-target="#navbarDrawer" aria-controls="navbarDrawer" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon" aria-hidden="true"></span>
-    </button>
-    <dialog className="drawer drawer-end" tabIndex="-1" id="navbarDrawer" aria-labelledby="navbarDrawerLabel">
-      <div className="drawer-header">
-        <h5 className="drawer-title" id="navbarDrawerLabel">Menu</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="drawer" aria-label="Close"></button>
-      </div>
-      <div className="drawer-body mb-2 md:mb-0">
-        <ul className="nav navbar-nav me-auto">
-          {/* <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-          </li>  
-          <li className="nav-item">
-            <Link className="nav-link" to="/settings">Settings</Link>
+    <nav className="navbar">
+      <div className="container">
+        <a className="navbar-brand" href="/">
+          Navbar scroll
+        </a>
+
+        <ul className="nav-links">
+          <li>
+            <a href="#action1">Home</a>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">About</Link>
-          </li> */}
+          <li>
+            <a href="#action2">Link</a>
+          </li>
+
+          <li className="dropdown">
+            <button className="dropdown-btn">
+              Dropdown ▼
+            </button>
+
+            <div className="dropdown-content">
+              <a href="#action3">Action</a>
+              <a href="#action4">Another action</a>
+              <hr />
+              <a href="#action5">Something else here</a>
+            </div>
+          </li>
+
+          <li>
+            <a href="#" className="disabled">
+              Disabled
+            </a>
+          </li>
         </ul>
+
+        <form className="search-form">
+          <input
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button type="submit">
+            Search
+          </button>
+        </form>
       </div>
-    </dialog>
-  </div>
-</nav>
-  )
+    </nav>
+  );
 }
 
+
+
+// {/* <li className="nav-item">
+//             <Link className="nav-link" to="/">Home</Link>
+//           </li>  
+//           <li className="nav-item">
+//             <Link className="nav-link" to="/settings">Settings</Link>
+//           </li>
+//           <li className="nav-item">
+//             <Link className="nav-link" to="/about">About</Link>
+//           </li> */}

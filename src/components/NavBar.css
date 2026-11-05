@@ -1,6 +1,79 @@
 .navbar {
-    background-color: #ff9898;
-    color: white;
-    padding: 15px;
-    
+  background-color: #343a40;
+  color: white;
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a,
+.dropdown-btn {
+  color: white;
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: white;
+  min-width: 180px;
+  top: 100%;
+  left: 0;
+  padding: 0.5rem;
+}
+
+.dropdown-content a {
+  display: block;
+  color: black;
+  padding: 0.5rem;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  padding: 0.5rem;
+}
+
+.search-form button {
+  padding: 0.5rem 1rem;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

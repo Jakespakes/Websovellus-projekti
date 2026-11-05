@@ -13,7 +13,7 @@ export default function MovieList() {
   const fetchData = async () => {
     setLoading(true)
     setError(null)
-    
+
     try {
       const response = await axios.get('/api/tests')
       setData(response.data)
@@ -33,19 +33,19 @@ export default function MovieList() {
       <h1 className='movieTitle'>Elokuva kortit</h1>
       <div className="card">
         {loading && <p>Loading...</p>}
-        
+
         {data && (
           <div className="movieList">
             <h3>Elokuva 1:</h3>
-            
-              { data.map((item) => (
-                <div key={item.id} className="movieCard">
-                  {`ID: ${item.id} - ${item.description}`}
-                </div>
-              ))}
-            </div>
+
+            {data.map((item) => (
+              <div key={item.id} className="movieCard">
+                {`ID: ${item.id} - ${item.description}`}
+              </div>
+            ))}
+          </div>
         )}
-        
+
         {error && (
           <div style={{ marginTop: '20px', padding: '10px', background: '#ffebee', color: 'red' }}>
             <h3>Error:</h3>
@@ -56,5 +56,4 @@ export default function MovieList() {
     </>
   )
 }
-
 
