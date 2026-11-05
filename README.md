@@ -1,9 +1,9 @@
 # Vaatimusmäärittely: Web-Ohjelmoinnin Sovellusprojekti Ryhmä 6
 
 **Versio:** 0.2  
-**Päivämäärä:** 28.10.2026  
+**Päivämäärä:** 05.11.2026  
 **Laatija:** Mikko Väisänen, Atte Paaso, Joni Ylimartimo, Janne Hietanen, Jaakko Paitsola <br>
-**Tila:** Tarkennettu versio, alustava hyväksytetty asiakkaalla
+**Tila:** Tarkennettu versio, alustava versio hyväksytetty asiakkaalla
 
 ## 1. Tausta ja tavoite
 
