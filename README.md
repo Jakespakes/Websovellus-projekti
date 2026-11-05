@@ -1,9 +1,9 @@
 # Vaatimusmäärittely: Web-Ohjelmoinnin Sovellusprojekti Ryhmä 6
 
-**Versio:** 0.1  
+**Versio:** 0.2  
 **Päivämäärä:** 28.10.2026  
 **Laatija:** Mikko Väisänen, Atte Paaso, Joni Ylimartimo, Janne Hietanen, Jaakko Paitsola <br>
-**Tila:** Ensimmäinen versio, odottaa asiakkaan hyväksyntää
+**Tila:** Tarkennettu versio, alustava hyväksytetty asiakkaalla
 
 ## 1. Tausta ja tavoite
 
@@ -170,6 +170,7 @@ Muutokset kirjataan dokumentin versiohistoriaan ja GitHubin backlogiin. Asiakas 
 | Versio | Päivä | Muutos |
 |---|---|---|
 | 0.1 | 28.10.2026 | Alustava vaatimusmäärittely |
+| 0.2 | 30.10.2026 | Ensimmäinen asiakaspalaveri |
 
 ## Scrum-tiimi ja työskentelytavat
  - Product Owner: Jouni Juntunen
