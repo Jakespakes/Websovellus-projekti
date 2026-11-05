@@ -1,0 +1,23 @@
+.movieList {
+    width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    background: #91c6ff;
+    text-align: center;
+}
+
+.movieCard {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    color: blue;
+    h1 {
+    justify-content: center;
+    }
+}
+
+
+.movieTitle {
+    display: flex;
+    justify-content: center;
+}
