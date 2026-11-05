@@ -6,14 +6,10 @@ import cors from 'cors'
 import errorHandler from './middleware/errorHandler.js'
 import testRouter from './routes/testRouter.js'
 
-
 const app = express()
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const frontendDist = path.join(__dirname, '..', 'dist')
-
-
-const apiKey = process.env.TMDB_API;
 
 app.use(cors())
 app.use(express.json())
@@ -41,40 +37,27 @@ app.get('/api/health', async (req, res) => {
   }
 })
 
-// Mikon koodaamaa roskaa! Pelätkää!!
-app.get('/movies', async(req, res) => {
+app.get('/api/movies', async (req, res, next) => {
+  try {
+    const response = await fetch('https://api.themoviedb.org/3/movie/popular', {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.TMDB_APIKEY}`
+      }
+    })
 
-  console.log('Endpoint saavutettu.')
-  try{
-
-  const url = 'https://api.themoviedb.org/3/movie/top_rated';
-  console.log('Lähetään API kutsu.')
-  console.log('API Key ladattu.', !!apiKey)
-
-  const response = await fetch(url, {
-
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${apiKey}`
+    if (!response.ok) {
+      const error = new Error(`Movie API returned ${response.status}`)
+      error.status = 502
+      throw error
     }
-  })
-  console.log('TMDB vastaus:', response.status)
 
-  const data = await response.json()
-
-  console.log(' Vastaus saatu.')
-
-  res.status(200).json(data.results)
-} catch(error){
-  console.error('TMDB Kutsu epäonnistui', error)
-
-  res.status(500).json({
-    message: 'Ei toimi jostaki syyst.'
-  })
-}
+    const result = await response.json()
+    res.status(200).json(result.results)
+  } catch (error) {
+    next(error)
+  }
 })
-// Mikon koodama roska loppuu... Pelätkää vähemmän!
 
 app.use('/api', (req, res, next) => {
   const error = new Error('Not found')
