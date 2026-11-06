@@ -1,8 +1,7 @@
 import React from 'react'
 import "./NavBar.css"
 
-
-export default function NavBar() {
+export default function NavBar({ searchTerm, setSearchTerm }) {
   return (
     <nav className="navbar">
       <div className="container">
@@ -37,17 +36,18 @@ export default function NavBar() {
             </a>
           </li>
         </ul>
-
-        <form className="search-form">
+        
+        <div className='search-form'>
           <input
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
+              placeholder="Search for movies"
+              type="search"
+              value={ searchTerm }
+              onChange={ (event) => setSearchTerm(event.target.value) }
           />
-          <button type="submit">
+          <button>
             Search
           </button>
-        </form>
+        </div>
       </div>
     </nav>
   );

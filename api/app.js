@@ -37,7 +37,7 @@ app.get('/api/health', async (req, res) => {
   }
 })
 
-app.get('/api/movies', async (req, res, next) => {
+app.get('/api/movies/popular', async (req, res, next) => {
   try {
     const response = await fetch('https://api.themoviedb.org/3/movie/popular', {
       headers: {
@@ -56,6 +56,28 @@ app.get('/api/movies', async (req, res, next) => {
     res.status(200).json(result.results)
   } catch (error) {
     next(error)
+  }
+})
+
+app.get('/api/movies/search', async (req, res) => {
+  const q = req.query.q
+  console.log(q)
+  
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&query=${q}`, {
+    headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.TMDB_APIKEY}`
+    }})
+
+    const result = await response.json()
+    res.status(200).json(result.results)  
+  } catch(error) {
+    console.error(error)
+
+    res.status(500).json({
+      message: "Search failed"
+    })
   }
 })
 
