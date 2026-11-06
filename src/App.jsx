@@ -1,5 +1,5 @@
-import MovieList from './components/MovieList'
-import Navbar from './components/NavBar'
+import Home from './components/home/Home'
+import Navbar from './components/navbar/NavBar'
 import { useState } from 'react'
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       </header>
 
       <main>
-        <MovieList
+        <Home
           searchTerm={ searchTerm }
         />
       </main>

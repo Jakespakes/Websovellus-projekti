@@ -36,16 +36,18 @@ export default function NavBar({ searchTerm, setSearchTerm }) {
             </a>
           </li>
         </ul>
-
-        <input 
-          placeholder="Search for movies"
-          type="search"
-          value={ searchTerm }
-          onChange={ (event) => setSearchTerm(event.target.value) }
-        />
-        <button>
-          Search
-        </button>
+        
+        <div className='search-form'>
+          <input
+              placeholder="Search for movies"
+              type="search"
+              value={ searchTerm }
+              onChange={ (event) => setSearchTerm(event.target.value) }
+          />
+          <button>
+            Search
+          </button>
+        </div>
       </div>
     </nav>
   );

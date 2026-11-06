@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import "./MovieList.css"
+import "./Home.css"
 
-export default function MovieList({ searchTerm }) {
+export default function Home({ searchTerm }) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchData = async () => {
     setLoading(true)
     setError(null)
     
-    // Mostly cannibalized code from app.jsx, and removed alot of features such as loading and error messages for brevity's sake.
-    // Main idea is that the Frontend sends a request to the backend, which then sends a request to TMDB, getting movie info as a JSON thats then sent here, parsed into an array-
-    // And presented onto the screen. 
     try {
-      const response = await axios.get('/api/movies') 
+      const response = await axios.get('/api/movies/popular') 
       setData(response.data)
       } catch (err) {
       setError(err.message)
@@ -28,6 +26,35 @@ export default function MovieList({ searchTerm }) {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      searchMovies()
+    }, 1000)
+
+    return () => clearTimeout(timeout)
+  }, [searchQuery])
+
+  const searchMovies = async () => {
+    if (searchQuery.trim().length < 3) {
+      /* setData([]); */
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await axios.get(`/api/movies/search?q=${searchQuery}`);
+
+      console.log(response.data);
+    } catch(err) {
+      console.error(err);
+      setError("Movie search failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   if(loading) return <main><h1>Downloading movies...</h1></main>
 
   const normalizedSearch = searchTerm.trim().toLowerCase()
@@ -35,6 +62,12 @@ export default function MovieList({ searchTerm }) {
   return (
     <div className='movieList'>
       <h1>Movies</h1>
+        <input 
+          placeholder="Search for a movie outside of this list"
+          type="text"
+          value={ searchQuery }
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
     
       <div>
         {data.filter((movie) => 
