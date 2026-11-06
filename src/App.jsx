@@ -1,15 +1,17 @@
 import MovieList from './components/MovieList'
-import Navbar from './components/NavBar'
+import Navbar from './components/navbar/NavBar'
+import SideBar from './components/sidebar/SideBar'
+
 
 function App() {
   return (
     <>
-      <header>
-        <Navbar/>
-      </header>
+    <Navbar />
+
+      <SideBar />
 
       <main>
-        <MovieList/>
+        <MovieList />
       </main>
     </>
   )

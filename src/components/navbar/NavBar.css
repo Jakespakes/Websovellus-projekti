@@ -1,8 +1,13 @@
 .navbar {
-  background-color: #343a40;
+  position:sticky;
+  top: 0;
+  width: 98%;
+  background-color: #213242;
   color: white;
   padding: 1rem;
 }
+
+
 
 .container {
   display: flex;
@@ -77,3 +82,4 @@
   opacity: 0.5;
   pointer-events: none;
 }
+

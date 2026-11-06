@@ -1,0 +1,21 @@
+.SideBar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+
+    width: 45px;
+    height: calc(100vh - 70px);
+
+    background-color: #495c79;
+
+    transition: width 0.3s ease;
+}
+
+.SideBar:hover {
+    width: 150px;
+}
+
+.SideBar:not(:hover) {
+    width: 70px;
+}
+
