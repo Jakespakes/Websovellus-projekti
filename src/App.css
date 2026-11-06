@@ -38,5 +38,8 @@
 }
 
 .read-the-docs {
-  color: #e09191;
+  color: #fffdebb1;
+}
+header {
+  position: sticky;
 }
