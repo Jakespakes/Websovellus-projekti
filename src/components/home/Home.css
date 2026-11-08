@@ -17,6 +17,9 @@
     }
 
 
+.searched-movies-list {
+    text-align: center;
+}
 
 .movieTitle {
     display: flex;

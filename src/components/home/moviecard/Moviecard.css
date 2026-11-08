@@ -1,0 +1,10 @@
+.moviecard {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    list-style: grid;
+}
+
+.movieCard-poster {
+    width: 240px;
+    border-radius: 50px;
+}   
