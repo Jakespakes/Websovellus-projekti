@@ -64,20 +64,23 @@ export default function Home({ searchTerm }) {
   return (
     <div>
       <div className="searched-movies-list">
-        <label>Search for a movie </label>
-        <input 
-          placeholder="Search for a movie outside of this list"
-          type="text"
-          value={ searchQuery }
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        <div className="input-field">
+          <label>Search for a movie </label>
+          <input 
+            placeholder="Search for a movie"
+            type="text"
+            value={ searchQuery }
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input-field"
+          />
+        </div>
         <Moviecard 
           data={ searchedMovies }
         />
       </div>
 
       <div className='movieList'>
-        <h1>Movies</h1>
+        <h1>Popular Movies</h1>
         <div>
           {data.filter((movie) => 
             [movie.title, movie.release_date]
@@ -102,4 +105,3 @@ export default function Home({ searchTerm }) {
     </div>
   )
 }
-

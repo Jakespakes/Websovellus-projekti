@@ -3,17 +3,21 @@ import "./Moviecard.css";
 export default function Moviecard({ data }) {
     return (
         <section className="moviecard">
-            <h2>Moviecard</h2>
             {data.map((movie) => (
-                <div key={movie.id} classname="movie-card">
+                <div key={movie.id}>
                     {movie.poster_path ? (
-                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} classname="movie-poster"/>
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>
                     ):(
-                        <p classname="no-poster">No poster availible</p>
+                        <p className="no-poster">No poster availible</p>
                     )}
-                    <div>
-                        <h2 classname="movie-title">{movie.title}</h2>
-                        <p classname="movie-overview">{movie.overview}</p>
+                    <div className="movie-details">
+                        <h2 className="movie-title">{movie.title}</h2>
+                        <div className="movie-genres">
+                            <p>Horror</p>
+                            <p>Comedy</p>
+                            <p>Cartoon</p>
+                        </div>
+                        <p className="movie-overview">{movie.overview}</p>
                     </div>
                 </div>
             ))}
