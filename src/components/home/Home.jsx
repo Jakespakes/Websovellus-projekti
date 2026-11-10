@@ -8,7 +8,23 @@ export default function Home({ searchQuery }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
 
+  // useEffect for fetching genres through api
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get('/api/movies/genres');
+        setGenres(response.data)
+      } catch(err) {
+        setError(err.message)
+      }
+    }
+
+    fetchGenres();
+  }, [])
+
+  // async / useEffect for fetching popular movielist throuh api
   const fetchData = async () => {
     setLoading(true)
     setError(null)
@@ -27,6 +43,8 @@ export default function Home({ searchQuery }) {
     fetchData()
   }, [])
 
+  // useEffect to get searchquery and updating the searched movie array
+  // after input is typed the async function searches through api with the input
   useEffect(() => {
     const timeout = setTimeout(() => {
       searchMovies()
@@ -63,6 +81,7 @@ export default function Home({ searchQuery }) {
       <div className="searched-movies-list">
         <Moviecard 
           data={ searchedMovies }
+          genres={ genres }
         />
       </div>
 
@@ -71,7 +90,7 @@ export default function Home({ searchQuery }) {
         <div>
           <Moviecard
             data={ data }
-            searchTerm={ searchQuery }
+            genres={ genres }
           />
         </div>
       </div>
