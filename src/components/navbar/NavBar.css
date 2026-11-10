@@ -1,12 +1,11 @@
 .navbar {
-  position:sticky;
+  position:fixed;
   top: 0;
   width: 98%;
   background-color: #213242;
   color: white;
   padding: 1rem;
 }
-
 
 
 .container {

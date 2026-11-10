@@ -19,3 +19,45 @@
     width: 70px;
 }
 
+.guestPanel {
+  margin: 15px;
+  padding: 15px;
+  
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  background-color: #e5e7ed;
+
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guestPanel h3 {
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.loginButton,
+.registerButton {
+  padding: 10px;
+
+  border: none;
+  border-radius: 5px;
+
+  cursor: pointer;
+}
+
+.loginButton {
+  background-color: #5865f2;
+  color: white;
+}
+
+.registerButton {
+  background-color: #43b581;
+  color: white;
+}
