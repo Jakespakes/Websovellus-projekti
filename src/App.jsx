@@ -4,20 +4,20 @@ import Navbar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
 import Footer from './components/home/Footer/Footer'
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <>
       <header>
         <Navbar 
-          value={ searchTerm }
-          setSearchTerm={ setSearchTerm }
+          searchQuery={ searchQuery }
+          setSearchQuery={ setSearchQuery }
         />
       </header>
 
       <main>
         <Home
-          searchTerm={ searchTerm }
+          searchQuery={ searchQuery }
         />
         <SideBar />
       </main>
