@@ -8,6 +8,23 @@ export default function NavBar({ searchQuery, setSearchQuery }) {
           Navbar scroll
         </a>
 
+
+
+        <div className="search-form">
+          <label htmlFor="movie-search"></label>
+          <input
+            id="movie-search"
+            placeholder="Search for a movie"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input-field"
+          />
+          <button>
+            Search
+          </button>
+        </div>
+
         <ul className="nav-links">
           <li>
             <a href="#action1">Home</a>
@@ -20,6 +37,7 @@ export default function NavBar({ searchQuery, setSearchQuery }) {
             <button className="dropdown-btn">
               Dropdown ▼
             </button>
+
 
             <div className="dropdown-content">
               <a href="#action3">Action</a>
@@ -36,22 +54,10 @@ export default function NavBar({ searchQuery, setSearchQuery }) {
           </li>
         </ul>
 
-        <div className="search-form">
-          <label htmlFor="movie-search">Search for a movie</label>
-          <input
-            id="movie-search"
-            placeholder="Search for a movie"
-            type="text"
-            value={ searchQuery }
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input-field"
-          />
-          <button>
-            Search
-          </button>
-        </div>
+
       </div>
-    </nav>
+
+    </nav >
   );
 }
 
@@ -59,7 +65,7 @@ export default function NavBar({ searchQuery, setSearchQuery }) {
 
 // {/* <li className="nav-item">
 //             <Link className="nav-link" to="/">Home</Link>
-//           </li>  
+//           </li>
 //           <li className="nav-item">
 //             <Link className="nav-link" to="/settings">Settings</Link>
 //           </li>
