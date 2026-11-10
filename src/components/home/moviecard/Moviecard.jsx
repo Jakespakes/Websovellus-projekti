@@ -1,6 +1,10 @@
 import "./Moviecard.css";
 
-export default function Moviecard({ data }) {
+export default function Moviecard({ data, genres }) {
+    const genreNamesById = Object.fromEntries(
+        genres.map(({ id, name }) => [id, name])
+    );
+
     return (
         <section className="moviecard">
             {data.map((movie) => (
@@ -13,9 +17,9 @@ export default function Moviecard({ data }) {
                     <div className="movie-details">
                         <h2 className="movie-title">{movie.title}</h2>
                         <div className="movie-genres">
-                            <p>Horror</p>
-                            <p>Comedy</p>
-                            <p>Cartoon</p>
+                            {movie.genre_ids
+                                .map((id) => <p key={id}>{ genreNamesById[id] }</p>)
+                            }
                         </div>
                         <p className="movie-overview">{movie.overview}</p>
                     </div>
