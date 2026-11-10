@@ -3,11 +3,10 @@ import axios from 'axios'
 import Moviecard from './moviecard/Moviecard.jsx'
 import "./Home.css"
 
-export default function Home({ searchTerm }) {
+export default function Home({ searchQuery }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
   const [searchedMovies, setSearchedMovies] = useState([]);
 
   const fetchData = async () => {
@@ -59,21 +58,9 @@ export default function Home({ searchTerm }) {
 
   if(loading) return <main><h1>Downloading movies...</h1></main>
 
-  const normalizedSearch = searchTerm.trim().toLowerCase()
-
   return (
     <div>
       <div className="searched-movies-list">
-        <div className="input-field">
-          <label>Search for a movie </label>
-          <input 
-            placeholder="Search for a movie"
-            type="text"
-            value={ searchQuery }
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input-field"
-          />
-        </div>
         <Moviecard 
           data={ searchedMovies }
         />
@@ -82,24 +69,10 @@ export default function Home({ searchTerm }) {
       <div className='movieList'>
         <h1>Popular Movies</h1>
         <div>
-          {data.filter((movie) => 
-            [movie.title, movie.release_date]
-            .some((value) => value?.toLowerCase().includes(normalizedSearch)))
-            .map((movie) => (
-              <div key={movie.id}>
-
-                {movie.poster_path ? (
-                  <img className='movie-poster' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>
-                ) : (
-                  <p>No poster available</p>
-                )}
-
-                <div>
-                  <h2 className='movieTitle'>{movie.title}</h2>
-                  <p>{movie.overview}</p>
-                </div>
-              </div>
-          ))}
+          <Moviecard
+            data={ data }
+            searchTerm={ searchQuery }
+          />
         </div>
       </div>
     </div>

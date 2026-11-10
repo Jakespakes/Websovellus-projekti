@@ -81,6 +81,31 @@ app.get('/api/movies/search', async (req, res) => {
   }
 })
 
+app.get('/api/movies/genres', async (req, res, next) => {
+  try {
+    const response = await fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.TMDB_APIKEY}`
+    }})
+    
+    if (!response.ok) {
+      const error = new Error(`Movie API returned ${response.status}`)
+      error.status = 502
+      throw error
+    }
+
+    const result = await response.json()
+    res.status(200).json(result.results)
+  } catch(error) {
+    next(error)
+
+    res.status(500).json({
+      message: "Cant fetch genres"
+    })
+  }
+})
+
 app.use('/api', (req, res, next) => {
   const error = new Error('Not found')
   error.status = 404
