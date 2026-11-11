@@ -16,9 +16,10 @@ export default function Moviemodal({movie, onClose}) {
                             >
                                 &times;
                             </button>
-                            <h2>movie title here</h2>
-                            <p>movie details</p>
-
+                            <h2>{movie.result.result.title}</h2>
+                            <p>Smaller poster, actors, directors, crew, runtime...</p>
+                            {/*TODO: Make a list of actors and of the cast that the user can scroll through with arrows! */}
+                            {/* Flexboxes would also be nice!*/}
                 </div>
             </div>
     )
