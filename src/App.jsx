@@ -5,6 +5,7 @@ import SideBar from './components/sidebar/SideBar'
 import Footer from './components/home/Footer/Footer'
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
         <Navbar 
           searchQuery={ searchQuery }
           setSearchQuery={ setSearchQuery }
+          onLoginClick={() => setShowLogin(true) }
         />
       </header>
 

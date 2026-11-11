@@ -1,9 +1,24 @@
 import "./Moviecard.css";
+import axios from "axios";
+import { useState } from 'react';
 
 export default function Moviecard({ data, genres }) {
+    const [selectedMovie, setSelectedMovie] = useState(null);
+
     const genreNamesById = Object.fromEntries(
         genres.map(({ id, name }) => [id, name])
     );
+
+    const handleMovieClick = async (id) => {
+        console.log(id)
+        try {
+            const response = await axios.get(`/api/movies/${id}/credits`)
+            setSelectedMovie(response.data);
+            console.log(response.data);
+        } catch(err) {
+            console.log("Could not fetch movie details")
+        }
+    }
 
     return (
         <section className="moviecard">
@@ -15,7 +30,9 @@ export default function Moviecard({ data, genres }) {
                         <p className="no-poster">No poster availible</p>
                     )}
                     <div className="movie-details">
-                        <h2 className="movie-title">{movie.title}</h2>
+                        <h2 className="movie-title"
+                            onClick={() => handleMovieClick(movie.id)}
+                        >{movie.title}</h2>
                         <div className="movie-genres">
                             {movie.genre_ids
                                 .map((id) => <p key={id}>{ genreNamesById[id] }</p>)

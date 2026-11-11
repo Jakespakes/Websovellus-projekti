@@ -1,6 +1,6 @@
 import "./NavBar.css"
 
-export default function NavBar({ searchQuery, setSearchQuery }) {
+export default function NavBar({ searchQuery, setSearchQuery, onLoginClick }) {
   return (
     <nav className="navbar">
       <div className="container">
