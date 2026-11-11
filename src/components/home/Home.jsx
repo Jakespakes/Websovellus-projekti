@@ -78,6 +78,7 @@ export default function Home({ searchQuery }) {
 
   return (
     <div>
+      {error ? <p className="message error" role="alert">{error}</p> : null}
       <div className="searched-movies-list">
         <Moviecard 
           data={ searchedMovies }
