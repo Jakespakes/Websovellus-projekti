@@ -1,6 +1,6 @@
 import "./NavBar.css"
 
-export default function NavBar({ searchQuery, setSearchQuery }) {
+export default function NavBar({ searchQuery, setSearchQuery, onLoginClick }) {
   return (
     <nav className="navbar">
       <div className="container">
@@ -46,10 +46,18 @@ export default function NavBar({ searchQuery, setSearchQuery }) {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input-field"
           />
+
           <button>
             Search
           </button>
         </div>
+        <button 
+          className="login-button"
+          onClick={onLoginClick}
+        >
+          LOGIN
+        </button>
+
       </div>
     </nav>
   );
