@@ -7,10 +7,10 @@
 
 .moviecard > div {
     padding: 20px;
-    border: 2px solid black;
+    border: 2px solid rgb(2, 2, 2);
     margin: 20px;
     background: #c2c2c2;
-    background: linear-gradient(90deg, rgba(194, 194, 194, 1) 0%, rgba(161, 201, 179, 1) 50%, rgba(115, 115, 115, 1) 100%);
+    background: linear-gradient(90deg, #3b175f 0%, #2d406c  100%);
     width: 700px;
     display: flex;
     gap: 20px;
@@ -42,7 +42,7 @@
     gap: 10px;
     p {
         background-color: rgb(183, 182, 182);
-        border: 2px solid black;
+        border: 2px solid rgb(3, 3, 3);
         font-size: 1.5rem;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         border-radius: 20px;

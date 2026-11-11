@@ -53,10 +53,13 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick }) {
             </a>
           </li>
         </ul>
-
-
+        <button
+          className="login-button"
+          onClick={onLoginClick}
+        >
+          LOGIN
+        </button>
       </div>
-
     </nav >
   );
 }

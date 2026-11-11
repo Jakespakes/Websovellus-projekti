@@ -6,13 +6,14 @@
     width: 45px;
     height: calc(100vh - 70px);
 
-    background-color: #495c79;
+    background-color: #0F172A;
 
     transition: width 0.3s ease;
 }
 
 .SideBar:hover {
     width: 150px;
+    background-color: #172554;
 }
 
 .SideBar:not(:hover) {
@@ -52,12 +53,12 @@
   cursor: pointer;
 }
 
-.loginButton {
+/* .login-button {
   background-color: #5865f2;
   color: white;
-}
+} */
 
 .registerButton {
-  background-color: #43b581;
+  background-color: #201abf;
   color: white;
 }

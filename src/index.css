@@ -3,7 +3,13 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #858585;
+
+  background: linear-gradient(
+    to bottom right,
+    #13093a 0%,
+    #0B132B 50%,
+    #13093a 100%
+  );
 }
 #root {
 width: 100%;
