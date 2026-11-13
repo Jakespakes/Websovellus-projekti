@@ -6,21 +6,26 @@ import Footer from './components/home/Footer/Footer'
 import Login from "./components/login/Login"
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchOption, setSearchOption] = useState('');
   const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
       <header>
-        <Navbar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          onLoginClick={() => setShowLogin(true)}
+
+        <Navbar 
+          searchQuery={ searchQuery }
+          setSearchQuery={ setSearchQuery }
+          searchOption={ searchOption }
+          setSearchOption={ setSearchOption }
+          onLoginClick={() => setShowLogin(true) }
         />
       </header>
 
       <main>
         <Home
           searchQuery={searchQuery}
+          searchOption={ searchOption }
         />
         <SideBar
           searchQuery={searchQuery}
