@@ -28,8 +28,6 @@ function App() {
           searchOption={ searchOption }
         />
         <SideBar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
           onLoginClick={() => setShowLogin(true)} 
           />
       </main>
