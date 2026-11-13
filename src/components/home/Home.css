@@ -24,3 +24,10 @@
     display: flex;
     justify-content: center;
 }
+
+.personcard {
+    text-align: center;
+    img {
+        width: 10rem;
+    }
+}
