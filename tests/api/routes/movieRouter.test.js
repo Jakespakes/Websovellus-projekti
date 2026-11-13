@@ -30,7 +30,7 @@ describe('GET /api/movies/popular', () => {
     })
 })
 
-describe('GET /api/movies/search', () => {    
+describe('GET /api/movies/search/movie', () => {    
     it('Returns a valid JSON response from TMDB search endpoint and uses the query that is put in as input', async () => {
         const searchedMovies = [{ id: 62, title: "Godfather" }];
         searchMovies.mockResolvedValue(searchedMovies);
@@ -38,7 +38,7 @@ describe('GET /api/movies/search', () => {
         const query = "Godfather"
 
         const response = await request(app) 
-            .get(`/api/movies/search?q=${query}`)
+            .get(`/api/movies/search/movie?q=${query}`)
             .expect(200)
             .expect('Content-Type', /json/);
 
