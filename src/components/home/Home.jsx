@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Moviecard from './moviecard/Moviecard.jsx'
+import Personcard from './personcard/Personcard.jsx'
 import "./Home.css"
 
-export default function Home({ searchQuery }) {
+export default function Home({ searchQuery, searchOption }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [searchedPeople, setSearchedPeople] = useState([]);
   const [genres, setGenres] = useState([]);
 
   // useEffect for fetching genres through api
@@ -44,6 +46,7 @@ export default function Home({ searchQuery }) {
   }, [])
 
   // useEffect to get searchquery and updating the searched movie array
+  // Timeout is for searching automatically without having the user to press enter
   // after input is typed the async function searches through api with the input
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -59,18 +62,37 @@ export default function Home({ searchQuery }) {
       return;
     }
 
-    try {
-      setLoading(true);
-      setError("");
+    if (searchOption === "movie") {
+      try {
+        setLoading(true);
+        setError("");
 
-      const response = await axios.get(`/api/movies/search?q=${searchQuery}`);
+        const response = await axios.get(`/api/movies/search/movie?q=${searchQuery}`);
 
-      setSearchedMovies(response.data);
-    } catch(err) {
-      console.error(err);
-      setError("Movie search failed");
-    } finally {
-      setLoading(false);
+        setSearchedMovies(response.data);
+      } catch(err) {
+        console.error(err);
+        setError("Movie search failed");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (searchOption === "person") {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await axios.get(`/api/movies/search/person?q=${searchQuery}`);
+
+        setSearchedPeople(response.data);
+        console.log(response.data);
+      } catch(err) {
+        console.error(err);
+        setError("People search failed");
+      } finally {
+        setLoading(false);
+      }
     }
   }
 
@@ -78,10 +100,17 @@ export default function Home({ searchQuery }) {
 
   return (
     <div>
+      {error ? <p className="message error" role="alert">{error}</p> : null}
       <div className="searched-movies-list">
         <Moviecard 
           data={ searchedMovies }
           genres={ genres }
+        />
+      </div>
+      
+      <div className="searched-person-list">
+        <Personcard 
+          data={ searchedPeople }
         />
       </div>
 
