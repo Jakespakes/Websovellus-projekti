@@ -1,5 +1,3 @@
-import "./Personcard.css";
-
 export default function Personcard({ data }) {
     return (
         <section>
