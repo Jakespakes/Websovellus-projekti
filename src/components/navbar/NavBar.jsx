@@ -12,23 +12,6 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
           Navbar scroll
         </a>
 
-
-
-        <div className="search-form">
-          <label htmlFor="movie-search"></label>
-          <input
-            id="movie-search"
-            placeholder="Search for a movie"
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input-field"
-          />
-          <button>
-            Search
-          </button>
-        </div>
-
         <ul className="nav-links">
           <li>
             <a href="#action1">Home</a>
@@ -51,11 +34,6 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
             </div>
           </li>
 
-          <li>
-            <a href="#" className="disabled">
-              Disabled
-            </a>
-          </li>
         </ul>
 
         <form className="search-form" onSubmit={handleSubmit}>
@@ -88,9 +66,6 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
             />
             Person
           </label>
-          <button>
-            Search
-          </button>
         </form>
         <button
           className="login-button"
