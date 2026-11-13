@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import './Login.css';
 
 function Login({ onClose }) {
+    const [isRegistering, setIsRegistering] = useState(false);
+
+
     return (
         <div className="auth-container">
             <div className="auth-card">
@@ -13,9 +17,21 @@ function Login({ onClose }) {
                     &times;
                 </button>
                 
-                <h2>Login</h2>
+                <h2>{ isRegistering ? 'Create Account' : 'Login' }</h2>
 
                 <form>
+                     {isRegistering && (
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Enter your username"
+                                required
+                            />
+                        </div>
+                    )}
+
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
@@ -36,10 +52,37 @@ function Login({ onClose }) {
                         />
                     </div>
 
+                    {isRegistering && (
+                        <div className="form-group">
+                            <label htmlFor="confirm-password">
+                                Confirm Password
+                            </label>
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                placeholder="Confirm your password"
+                                required
+                            />
+                        </div>
+                    )}
+
                     <button type="submit">
-                        Login
+                        {isRegistering ? 'Register' : 'Login'}
                     </button>
                 </form>
+
+                <div className="auth-switch">
+                    {isRegistering
+                        ? 'Already have an account?'
+                        : "Don't have an account?"}
+
+                    <button
+                        type="button"
+                        onClick={() => setIsRegistering(!isRegistering)}
+                    >
+                        {isRegistering ? 'Login' : 'Register'}
+                    </button>
+                </div>
             </div>
         </div>
     );
