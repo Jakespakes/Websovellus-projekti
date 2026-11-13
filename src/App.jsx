@@ -6,6 +6,7 @@ import Login from './components/login/Login'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchOption, setSearchOption] = useState('');
   const [showLogin, setShowLogin] = useState(false);
 
   return (
@@ -14,6 +15,8 @@ function App() {
         <Navbar 
           searchQuery={ searchQuery }
           setSearchQuery={ setSearchQuery }
+          searchOption={ searchOption }
+          setSearchOption={ setSearchOption }
           onLoginClick={() => setShowLogin(true) }
         />
       </header>
@@ -21,6 +24,7 @@ function App() {
       <main>
         <Home
           searchQuery={ searchQuery }
+          searchOption={ searchOption }
         />
         <SideBar />
       </main>
