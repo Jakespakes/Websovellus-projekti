@@ -2,6 +2,7 @@ import express from 'express';
 import request from 'supertest';
 import { describe, expect, it, vi } from 'vitest';
 
+// Stub the model so this route test does not need a running database.
 vi.mock('../../../api/services/tmdbService.js', () => ({
     getPopularMovies: vi.fn(), searchMovies: vi.fn(), getMovieGenres: vi.fn()
 }))
@@ -15,7 +16,7 @@ app.use('/api/movies', movieRouter);
 describe('GET /api/movies/popular', () => {
     it('Returns a valid JSON response from TMDB popular endpoint', async () => {
         const movies = [{ id: 1, title: "odyssey" }];
-        // Simulate the model returning rows from tmdb
+        // Simulate the model returning rows from TMDB
         getPopularMovies.mockResolvedValue(movies);
 
         // Send an HTTP request through Express, the real router, and the controller
