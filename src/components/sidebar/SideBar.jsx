@@ -2,16 +2,32 @@
 // import axios from "axios";
 import "./SideBar.css";
 
-export default function SideBar () {
+export default function SideBar({onLoginClick }) {
+    const isLoggedIn = false;
+
     return (
         <aside className="SideBar">
-            
+
+            {!isLoggedIn && (
+                <div className="guestPanel">
+                    <h3>Testi</h3>
+                    <p/>
+    
+                    <button className="login-button"
+                        onClick={onLoginClick}>
+                        login
+                    </button>
+                    <button className="registerButton">
+                        Rekisteröidy
+                    </button>
+                </div>)}
         </aside>
     );
- }
+}
 
 
- //     const [groups, setGroups] = useState([]);
+
+//     const [groups, setGroups] = useState([]);
 
 //     useEffect(() => {
 //         fetchGroups();

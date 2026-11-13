@@ -6,14 +6,15 @@
 }
 
 .moviecard > div {
-    padding: 20px;
-    border: 2px solid black;
-    margin: 20px;
+    padding: 1.4rem;
+    border: 2px solid rgb(2, 2, 2);
+    margin: 1.4rem;
     background: #c2c2c2;
-    background: linear-gradient(90deg, rgba(194, 194, 194, 1) 0%, rgba(161, 201, 179, 1) 50%, rgba(115, 115, 115, 1) 100%);
-    width: 700px;
+    background: linear-gradient(90deg, #3b175f 0%, #2d406c  100%);
+    width: 45rem;
+    height: 35rem;
     display: flex;
-    gap: 20px;
+    gap: 1.4rem;
     h2 p {
         display: flex;
         flex-direction: column;
@@ -21,8 +22,8 @@
 }
 
 .moviecard img {
-    width: 300px;
-    border: 2px solid black;
+    width: 18rem;
+    border: 2px solid rgb(0, 0, 0);
     cursor: pointer;
 }
 
@@ -42,12 +43,11 @@
     gap: 10px;
     p {
         background-color: rgb(183, 182, 182);
-        border: 2px solid black;
+        border: 2px solid rgb(3, 3, 3);
         font-size: 1.5rem;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        border-radius: 20px;
-        padding-left: 8px;
-        padding-right: 8px;
+        border-radius: 1.4rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
         margin: 0;
         max-width: 100%;
         overflow-wrap: anywhere;
@@ -56,7 +56,7 @@
 
 .movie-overview {
     background-color: rgb(183, 182, 182, 0.5);
-    padding: 10px;
-    border-radius: 16px;
-    border: 2px solid black;
+    padding: 0.6rem;
+    border-radius: 1rem;
+    border: 2px solid rgb(0, 0, 0);
 }

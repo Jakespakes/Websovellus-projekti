@@ -2,8 +2,8 @@ import { useState } from 'react'
 import Home from './components/home/Home'
 import Navbar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
-import Login from './components/login/Login'
-
+import Footer from './components/home/Footer/Footer'
+import Login from "./components/login/Login"
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOption, setSearchOption] = useState('');
@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       <header>
+
         <Navbar 
           searchQuery={ searchQuery }
           setSearchQuery={ setSearchQuery }
@@ -23,12 +24,15 @@ function App() {
 
       <main>
         <Home
-          searchQuery={ searchQuery }
+          searchQuery={searchQuery}
           searchOption={ searchOption }
         />
-        <SideBar />
+        <SideBar
+          onLoginClick={() => setShowLogin(true)} 
+          />
       </main>
       {showLogin && <Login onClose={() => setShowLogin(false)} />}
+      <Footer />
     </>
   )
 }

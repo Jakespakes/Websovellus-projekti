@@ -1,21 +1,69 @@
 .SideBar {
-    position: fixed;
-    top: 70px;
-    left: 0;
+  position: fixed;
+  top: 4.4rem;
+  left: 0;
 
-    width: 45px;
-    height: calc(100vh - 70px);
+  width: 2.8rem;
+  height: calc(100vh - 70px);
 
-    background-color: #495c79;
+  background-color: #140527;
 
-    transition: width 0.3s ease;
+  transition: width 0.3s ease;
+  overflow: hidden;
 }
 
 .SideBar:hover {
-    width: 150px;
+  width: 9.3rem;
+  background-color: #23094c;
 }
 
 .SideBar:not(:hover) {
-    width: 70px;
+  width: 4.3rem;
+  overflow: hidden;
 }
 
+.SideBar:hover .guestPanel {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.guestPanel {
+  margin: 1rem;
+  padding: 1rem;
+
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  background-color: #23094c;
+
+  border-radius: 0.6rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+
+.guestPanel h3 {
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.loginButton,
+.registerButton {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.registerButton {
+  background-color: #201abf;
+  color: white;
+}
