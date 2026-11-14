@@ -23,8 +23,24 @@ function App() {
   }
 
   // Temporary logout
-  const handleLogout = () => { setUser(null);};
-  
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      if (!response.ok) {
+        throw new Error('Logout failed.');
+      }
+
+      setUser(null);
+      
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
     <>
       <header>
