@@ -1,7 +1,7 @@
 import "./Moviecard.css";
 import axios from "axios";
 import { useState } from 'react';
-import Moviemodal from "./MovieModal";
+import Moviemodal from "./Moviemodal.jsx";
 
 export default function Moviecard({ data, genres }) {
     const [selectedMovie, setSelectedMovie] = useState(null);
