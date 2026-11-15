@@ -13,7 +13,7 @@ export default async function requireAuth(req, res, next) {
         // Luetaan JWT ja tarkistetaan sen voimassaolo. 
         // Jos JWT on voimassa, se palauttaa payloadin, joka sisältää käyttäjän id:n (sub).
         const payload = jwt.verify(token, process.env.JWT_SECRET, {
-        expiresIn: '30m', algorithms: ['HS256'], issuer: 'movie-community', audience: 'movie-community-web'
+        algorithms: ['HS256'], issuer: 'movie-community', audience: 'movie-community-web'
         });
 
         const user = await findUserById(payload.sub);

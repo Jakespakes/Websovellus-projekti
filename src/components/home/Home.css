@@ -1,28 +1,15 @@
 .movieList {
-    width: 1200px;
-    margin: 20px auto;
+    width: 72rem;
+    margin: 4rem auto;
     padding: 10px;
-    background-color: rgb(112, 112, 112);
     text-align: center;
-}
-
-.movieCard {
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
-    color: blue;
 }
 
 .input-field {
     text-align: center;
-    padding: 12px;
-    margin: 10px 0;
+    padding: 0.8rem;
+    margin: 0.6rem 0;
     box-sizing: border-box;
-}
-
-.movieTitle {
-    display: flex;
-    justify-content: center;
 }
 
 .personcard {
