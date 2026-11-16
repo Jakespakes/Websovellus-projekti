@@ -27,7 +27,7 @@ export default function Moviecard({ data, genres }) {
                     {movie.poster_path ? (
                         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>
                     ):(
-                        <p className="no-poster">No poster availible</p>
+                        <p className="no-poster">No poster available</p>
                     )}
                     <div className="movie-details">
                         <h2 className="movie-title"

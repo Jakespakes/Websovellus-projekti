@@ -1,18 +1,33 @@
 .moviecard {
-    text-align: center;
-    align-items: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    overflow-x: auto;
+
+    width: auto;
+
+    margin-left: 100px;
+    margin-right: 150px;
+
+    gap: 1rem;
+    padding: 1rem;
+
+    align-items: stretch;
 }
 
 .moviecard > div {
+    flex-shrink: 0;
+
+    width: min(70vw, 600px);
+    height: 35rem;
+
     padding: 1.4rem;
     border: 2px solid rgb(2, 2, 2);
     margin: 1.4rem;
+    
     background: #c2c2c2;
     background: linear-gradient(90deg, #3b175f 0%, #2d406c  100%);
-    width: 45rem;
-    height: 35rem;
+
     display: flex;
     gap: 1.4rem;
     h2 p {

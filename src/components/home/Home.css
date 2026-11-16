@@ -1,6 +1,8 @@
 .movieList {
-    width: 72rem;
+    width: calc(90%-400px);
     margin: 4rem auto;
+    margin-left: 15.6;
+    margin-right: 9.3;
     padding: 10px;
     text-align: center;
 }
