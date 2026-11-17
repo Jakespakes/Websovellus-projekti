@@ -1,4 +1,4 @@
-import {createGroupWithMembers, getGroupsByUserId, getOwnedGroupsByUserId, deleteGroup, getGroupByGroupId} from '../models/groupModel.js'
+import {createGroupWithMembers, getGroupsByUserId, getOwnedGroupsByUserId, deleteGroup, getGroupByGroupId, updateOwnedGroup} from '../models/groupModel.js'
 
 export async function createNewGroup(name, description, ownerId) {
 
@@ -29,6 +29,22 @@ export async function getUsersOwnedGroups(userId) {
         throw new Error('Käyttäjän tunnus (id) on pakollinen');
     }
     return await getOwnedGroupsByUserId(userId);
+}
+
+export async function editGroup(groupId, ownerId, name, description) {
+    if (!name?.trim()) {
+        const error = new Error('Ryhmän nimi on pakollinen');
+        error.status = 400;
+        throw error;
+    }
+    const group = await updateOwnedGroup(groupId, ownerId, name, description);
+    
+    if (!group) {
+        const error = new Error('Ryhmää ei löydy tai käyttäjä ei ole ryhmän omistaja');
+        error.status = 404;
+        throw error;
+    }
+    return group;
 }
 
 export async function deleteOwnedGroup(groupId, userId) {
