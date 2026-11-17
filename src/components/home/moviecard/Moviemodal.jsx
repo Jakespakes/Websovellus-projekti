@@ -1,12 +1,18 @@
 import "./Moviemodal.css"
+import Moviereview from "./Moviereview"
 
 
 export default function Moviemodal({movie, onClose}) {
+    
+
     console.log("Modal rendered", movie)
     const director = movie.result.credits.crew.find(
         (member) => member.job === "Director"
     )
     const actors = movie.result.credits.cast.slice(0,5)
+
+        
+
     return (
         
             <div className="modal-overlay" onClick={onClose}>
@@ -51,10 +57,16 @@ export default function Moviemodal({movie, onClose}) {
                             <div>
                                 <p>{movie.result.result.overview}</p>
                             </div>
+
+                            <div>
+                                <Moviereview movieID={movie.result.result.id} onSubmit={(reviewData) => {
+                                console.log(reviewData)}} />
+                            </div>
                             {/*TODO: Make a list of actors and of the cast that the user can scroll through with arrows! */}
                             {/* Flexboxes would also be nice!*/}
                             {/* Additionally, CSS styling for this, since at the moment this is atrocious. But it's the first vers of this feature. */}
                 </div>
             </div>
+
     )
 }
