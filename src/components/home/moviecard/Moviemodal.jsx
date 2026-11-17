@@ -28,7 +28,9 @@ export default function Moviemodal({movie, onClose}) {
                             <p>Kuvaa ei ole saatavilla.</p>
                                 )}
                             <div>
-                                <p> Julkaistu: {movie.result.result.release_date}</p>
+                                <p> Julkaistu: {
+                                    new Intl.DateTimeFormat("fi-FI").format(new Date(movie.result.result.release_date))}
+                                    </p>
                             </div>
                             <div>
                             <h3>Ohjaaja: {director?.name || "Ei löytynyt"}</h3>
