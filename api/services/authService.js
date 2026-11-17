@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import {createUserRecord, findUserByEmail, findUserByUsername} from '../models/userModel.js';
+import {createUserRecord, findUserByEmail, findUserByUsername, updateUser, updatePassword, findUserById, findUserWithPasswordById} from '../models/userModel.js';
 
 /** Luo uuden käyttäjän*/
 export async function createUser(username, email, password) {
@@ -8,6 +8,8 @@ export async function createUser(username, email, password) {
     const trimmedUsername = username.trim();
     const trimmedEmail = email.trim();
     const saltRounds = 12;
+
+    // MUOKKAA ALLE VIRHEVIESTIEIHIN RES.JSON JA MESSAGE PALAUTUS!!!!
 
     // Käyttäjänimen validointia: tarkistetaan, että käyttäjänimi on 3-20 merkkiä pitkä
     if (/^[a-zåäöA-ZÅÄÖ0-9]{3,20}$/.test(trimmedUsername) === false) {
@@ -84,3 +86,29 @@ export async function authenticateUser(email, password) {
         created_at: user.created_at
     };
 };
+
+export async function editUser(userId, username, email){
+    if (!username || !email){
+        const error = new Error('Käyttäjätunnus ja salasana vaaditaan')
+        error.status = 400;
+        throw error;
+    }
+
+    return await updateUser(userId, username.trim(), email.trim().toLowerCase());
+}
+
+export async function editPassword(userId, currentPassword, newPassword) {
+    const user = await findUserWithPasswordById(userId);
+    const passwordValidation = await bcrypt.compare(currentPassword, user.password_hash);
+    const saltRounds = 12;
+
+    if (!passwordValidation) {
+        const error = new Error('Nykyinen salasana on väärin')
+        error.status = 401;
+        throw error;
+    }
+
+    const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
+
+    await updatePassword(userId, newPasswordHash);
+}
