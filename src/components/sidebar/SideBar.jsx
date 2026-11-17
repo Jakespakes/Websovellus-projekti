@@ -24,8 +24,8 @@ export default function SideBar({onLoginClick, onRegisterClick, onCreateGroupCli
                 </div>
                 ) : (
                     <div className="userPanel">
-                        <h3>Welcome, {user.username}!</h3>
-                        <p>You're logged in.</p>
+                        <h3>Tervetuloa, {user.username}!</h3>
+                        <p>Olet kirjautuneenä sisään.</p>
                         <button
                             className="CreateGroupButton"
                             onClick={onCreateGroupClick}

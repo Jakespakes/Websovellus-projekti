@@ -92,7 +92,7 @@ function App() {
           onSuccess={(groupName) => {
             setShowGroupCreation(false);
             setGroupSuccessMessage(
-              `Group "${groupName}" created successfully!`
+              `Ryhmä "${groupName}" luotu onnistuneesti!`
             );
 
             setTimeout(() => {

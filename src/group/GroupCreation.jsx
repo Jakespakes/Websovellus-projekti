@@ -123,7 +123,7 @@ function GroupCreation({ onClose, onSuccess }) {
                         <input
                             id="groupName"
                             type="text"
-                            placeholder="Enter group name"
+                            placeholder="Ryhmän nimi"
                             value={groupName}
                             onChange={(e) => setGroupName(e.target.value)}
                             maxLength={100}
@@ -136,7 +136,7 @@ function GroupCreation({ onClose, onSuccess }) {
 
                         <textarea
                             id="description"
-                            placeholder="What is your group about?"
+                            placeholder="Kuvaus ryhmästä"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             rows="4"
@@ -146,8 +146,8 @@ function GroupCreation({ onClose, onSuccess }) {
                     {/* Explain the group's visibility and membership rules. */}
                     <div className="group-visibility-info">
                         <p>
-                            Anyone can find and view this group.
-                            Only members can access reviews and playlists.
+                            Kuka tahansa näkee ryhmän ja voi pyytää liittyä jäseneksi.
+                            Vain jäsenet voivat tehdä elokuva-arvosteluja ja nähdä elokuvalistat.
                         </p>
                     </div>
 
