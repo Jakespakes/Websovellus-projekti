@@ -1,0 +1,185 @@
+
+.group-creation-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 80vh;
+    padding: 40px 20px;
+}
+
+.group-creation-card { position: relative;
+    width: 100%;
+    max-width: 600px;
+    padding: 35px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.group-creation-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.group-creation-header h1 {
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.group-creation-header p {
+    color: #777;
+    margin: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+}
+
+.form-group > label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #646cff;
+    box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.15);
+}
+
+.group-visibility-info {
+    padding: 15px;
+    margin-bottom: 22px;
+    background-color: #f3f4ff;
+    border-radius: 8px;
+}
+
+.group-visibility-info strong {
+    color: #444bc2;
+}
+
+.group-visibility-info p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.create-group-button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 6px;
+    background-color: #646cff;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.create-group-button:hover {
+    background-color: #5058d8;
+}
+
+@media (max-width: 600px) {
+    .group-creation-card {
+        padding: 22px;
+    }
+
+    .group-creation-container {
+        padding: 20px 12px;
+    }
+}
+
+
+/* Feedback messages */
+.group-message {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* Successful group creation */
+.group-message.success {
+    background-color: #e4f7e9;
+    color: #207a38;
+}
+
+/* Failed group creation */
+.group-message.error {
+    background-color: #fde8e8;
+    color: #b42318;
+}
+
+/* Make the button look disabled while the request is processing */
+.create-group-button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+.close-button {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: #777;
+    cursor: pointer;
+}
+
+.success-notification {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #d4edda;
+    color: #155724;
+
+    padding: 14px 24px;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+
+    width: max-content;
+    max-width: calc(100% - 40px);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+
+    animation: notificationFadeIn 0.3s ease-out;
+}
+
+@keyframes notificationFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}

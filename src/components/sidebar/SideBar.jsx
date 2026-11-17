@@ -2,7 +2,7 @@
 // import axios from "axios";
 import "./SideBar.css";
 
-export default function SideBar({onLoginClick, onRegisterClick, user }) {
+export default function SideBar({onLoginClick, onRegisterClick, onCreateGroupClick, user }) {
     const isLoggedIn = false;
 
     return (
@@ -26,6 +26,12 @@ export default function SideBar({onLoginClick, onRegisterClick, user }) {
                     <div className="userPanel">
                         <h3>Welcome, {user.username}!</h3>
                         <p>You're logged in.</p>
+                        <button
+                            className="CreateGroupButton"
+                            onClick={onCreateGroupClick}
+                        >
+                            Create a group
+                        </button>
                     </div>
                 )}
             </aside>
