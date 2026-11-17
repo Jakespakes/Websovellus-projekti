@@ -1,8 +1,8 @@
-import { getReview, createReviewRecord, deleteReviewById } from "../services/reviewService.js";
+import { getReview, createReviewRecord, deleteReviewById, updateReviewById } from "../services/reviewService.js";
 
 export async function findReview(req, res, next) {
     try {
-        const result = await getReview(req.review.id);
+        const result = await getReview(req.params.id);
         res.status(200).json(result);
     } catch(error) {
         next(error);
@@ -29,4 +29,20 @@ export async function deleteReview(req, res) {
     deleteReviewById(req.params.id);
 
     res.json({ message: "Review deleted" });
+}
+
+export async function updateReview(req, res) {
+    try {
+        const { rating, comment } = req.body;
+        await updateReviewById(rating, comment, req.params.id, req.user.id);
+
+        res.status(201).json({
+            message: "Review updated succesfully",
+        })
+    } catch(error) {
+        res.status(500).json({
+            message: "Updating review failed",
+            error: error.message
+        })
+    }
 }
