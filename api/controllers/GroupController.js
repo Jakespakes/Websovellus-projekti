@@ -1,4 +1,4 @@
-import {createNewGroup, getUserGroupsByUserId, getUsersOwnedGroups, deleteOwnedGroup} from '../services/groupService.js'
+import {createNewGroup, getUserGroupsByUserId, getUsersOwnedGroups, editGroup, deleteOwnedGroup} from '../services/groupService.js'
 
 export async function createGroup(req, res, next) {
     try {
@@ -27,6 +27,15 @@ export async function getOwnedGroups(req, res, next) {
     try {
         const groups = await getUsersOwnedGroups(req.user.id);
         res.json(groups);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function updateGroup(req, res, next) {
+    try {
+        const group = await editGroup(req.params.id, req.user.id, req.body.name, req.body.description);
+        res.json({ message: 'Ryhmä päivitetty onnistuneesti', group });
     } catch (error) {
         next(error);
     }

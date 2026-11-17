@@ -67,6 +67,19 @@ export async function getOwnedGroupsByUserId(userId) {
     }
 }
 
+export async function updateOwnedGroup(groupId, ownerId, name, description) {
+    const client = await pool.connect();
+    try {
+        const result = await client.query(
+            'UPDATE groups SET name = $1, description = $2 WHERE id = $3 AND owner_id = $4 RETURNING *',
+            [name, description, groupId, ownerId]
+        );
+        return result.rows[0];
+    } finally {
+        client.release();
+    }
+}
+
 export async function deleteGroup(groupId) {
     const client = await pool.connect();
     try {
