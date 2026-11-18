@@ -1,4 +1,4 @@
-import {createUser, authenticateUser, editUser, editPassword} from '../services/authService.js';
+import {createUser, authenticateUser, editUser, editPassword, removeUser} from '../services/authService.js';
 import {issueCookie, clearCookie} from '../services/jwtService.js';
 
 
@@ -7,7 +7,7 @@ export async function register(req, res, next) {
     const { username, email, password } = req.body;
     await createUser(username, email, password);
 
-    res.status(201).json({message: 'Käyttäjä luotu'});
+    res.status(201).json({message: 'Käyttäjä luotu', user});
   } catch (error) {
     next(error);
   }
@@ -75,3 +75,13 @@ export async function changePassword(req, res, next){
   }
 };
 
+export async function deleteAccount(req, res, next) {
+
+  try {
+    await removeUser(req.user.id);
+    res.status(200).json({message: 'Käyttäjä poistettu'});
+    } catch (error) {
+    next(error);
+  }
+  
+}

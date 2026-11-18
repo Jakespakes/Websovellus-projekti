@@ -20,8 +20,8 @@ export async function createGroupWithMembers(name, description, ownerId) {
     } catch (error) {
         await client.query('ROLLBACK');
 
-        if (error.code === '23505') { // Unique violation
-            const duplicateError = new Error('Group name already exists');
+        if (error.code === '23505') { // PostgreSQL unique violation
+            const duplicateError = new Error('Nimi on jo käytössä');
             duplicateError.status = 409; // Conflict
             throw duplicateError;
         }
