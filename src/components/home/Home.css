@@ -1,5 +1,5 @@
 .movieList {
-    width: 72rem;
+    width: 100%;
     margin: 4rem auto;
     padding: 10px;
     text-align: center;
@@ -20,4 +20,9 @@
     img {
         width: 10rem;
     }
+}
+
+.searched-movies-list,
+.searched-person-list {
+    margin-top: 6rem;
 }

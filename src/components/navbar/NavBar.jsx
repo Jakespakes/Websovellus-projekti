@@ -91,15 +91,3 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
     </nav >
   );
 }
-
-
-
-// {/* <li className="nav-item">
-//             <Link className="nav-link" to="/">Home</Link>
-//           </li>
-//           <li className="nav-item">
-//             <Link className="nav-link" to="/settings">Settings</Link>
-//           </li>
-//           <li className="nav-item">
-//             <Link className="nav-link" to="/about">About</Link>
-//           </li> */}

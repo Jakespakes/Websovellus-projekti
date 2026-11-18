@@ -39,39 +39,42 @@ function App() {
       }
 
       setUser(null);
-      
+
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
 
   return (
-    <>
-      <header>
+    <div className="layout">
 
-        <Navbar 
-          searchQuery={ searchQuery }
-          setSearchQuery={ setSearchQuery }
-          searchOption={ searchOption }
-          setSearchOption={ setSearchOption }
-          onLoginClick={() => openLogin('login') }
+      <header className="header">
+        <Navbar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchOption={searchOption}
+          setSearchOption={setSearchOption}
+          onLoginClick={() => openLogin('login')}
           user={user}
           onLogout={handleLogout}
         />
       </header>
 
-      <main>
-        <Home
-          searchQuery={searchQuery}
-          searchOption={ searchOption }
-        />
+      <aside className="sidebar">
         <SideBar
           onLoginClick={() => openLogin('login')}
           onRegisterClick={() => openLogin('register')}
           onCreateGroupClick={() => setShowGroupCreation(true)}
           user={user}
           onLogout={handleLogout}
-          />
+        />
+      </aside>
+
+      <main>
+        <Home
+          searchQuery={searchQuery}
+          searchOption={searchOption}
+        />
       </main>
 
       {groupSuccessMessage && (
@@ -102,7 +105,7 @@ function App() {
         />
 )}
       <Footer />
-    </>
+    </div>
   )
 }
 
