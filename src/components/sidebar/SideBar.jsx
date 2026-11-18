@@ -1,9 +1,41 @@
-// import { useEffect, useState } from "react";
-// import axios from "axios";
+ import { useEffect, useState } from "react";
+ import axios from "axios";
 import "./SideBar.css";
 
-export default function SideBar({onLoginClick, onRegisterClick, onCreateGroupClick, user }) {
+export default function SideBar({
+    onLoginClick,
+    onRegisterClick,
+    onCreateGroupClick,
+    user,
+    refreshTrigger
+}) {
+
+    const [groups, setGroups] = useState([]);
+
     const isLoggedIn = false;
+
+
+    useEffect(() => {
+
+        if (user) {
+            fetchGroups();
+        }
+        else {
+            // Clear groups when the user logs out
+            setGroups([]);
+        }
+        }, [user, refreshTrigger]);
+
+        async function fetchGroups() {
+            try {
+                const response = await axios.get("/api/groups/my-groups", {
+                    withCredentials: true
+                });
+                setGroups(response.data);
+            } catch (error) {
+                console.error("Ryhmien haku epäonnistui:", error);
+            }
+        }
 
     return (
         <aside className="SideBar">
@@ -15,11 +47,11 @@ export default function SideBar({onLoginClick, onRegisterClick, onCreateGroupCli
     
                     <button className="login-button"
                         onClick={onLoginClick}>
-                        Login
+                        Kirjaudu sisään
                     </button>
                     <button className="registerButton"
                         onClick={onRegisterClick}>
-                        Register
+                        Rekisteröidy
                     </button>
                 </div>
                 ) : (
@@ -30,42 +62,21 @@ export default function SideBar({onLoginClick, onRegisterClick, onCreateGroupCli
                             className="CreateGroupButton"
                             onClick={onCreateGroupClick}
                         >
-                            Create a group
+                            Luo ryhmä
                         </button>
-                    </div>
-                )}
+                        <div className="groupList">
+                            <h4>Omat ryhmät</h4>
+                            {groups.length > 0 ? (
+                                groups.map((group) => (
+                                <div className="groupCard" key={group.id}>
+                                    {group.name}
+                                </div>
+                                ))
+                            ) : (
+                            <p>Et kuulu vielä yhteenkään ryhmään.</p>)}
+                            </div>
+                        </div>
+                        )}
             </aside>
         );
-    }
-
-
-
-//     const [groups, setGroups] = useState([]);
-
-//     useEffect(() => {
-//         fetchGroups();
-//     }, []);
-
-//     async function FetchGroups() {
-//     try {
-//         const response = await axios.get("/")
-//         setGroups(response.data);
-//     } catch (error) {
-//         console.error(error);
-//      }
-//     }
-//     return (
-//     <aside className="SideBar">
-//       {groups.map((group) => (
-//         <div className="groupCard" key={group.id}>
-//           <img
-//             src={group.image}
-//             alt={group.name}
-//             className="groupImage"
-//           />
-
-//           <span>{group.name}</span>
-//         </div>
-//       ))}
-//     </aside>
-//     );
+}
