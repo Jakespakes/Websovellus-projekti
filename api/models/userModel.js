@@ -39,3 +39,9 @@ export async function updatePassword(userId, hashedPassword) {
     [hashedPassword, userId]
     ); 
 }
+
+export async function deleteUser(userId){
+    const result = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *',
+    [userId]);
+    return result.rows[0];
+}
