@@ -1,5 +1,5 @@
 import express from 'express';
-import {register, login, getProfile, logout} from '../controllers/AuthController.js';
+import {register, login, getProfile, logout, updateProfile, changePassword, deleteAccount} from '../controllers/AuthController.js';
 import requireAuth from '../middleware/requireAuth.js';
 import requireAdmin from '../middleware/requireAdmin.js';
 
@@ -9,6 +9,8 @@ router.post('/register', register);
 router.post('/login', login);
 router.post('/logout', requireAuth, logout);
 router.get('/profile', requireAuth, getProfile);
-//router.delete('/users/:id', requireAuth, requireAdmin, deleteUser);
+router.patch('/profile', requireAuth, updateProfile)
+router.patch('/change-password', requireAuth, changePassword)
+router.delete('/profile', requireAuth, deleteAccount);
 
 export default router;

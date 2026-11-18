@@ -8,6 +8,8 @@ import errorHandler from './middleware/errorHandler.js'
 import testRouter from './routes/testRouter.js'
 import movieRouter from './routes/movieRouter.js'
 import authRouter from './routes/authRouter.js'
+import groupRouter from './routes/groupRouter.js'
+import reviewRouter from './routes/reviewRouter.js'
 
 const app = express()
 
@@ -22,6 +24,8 @@ app.use(cookieParser())
 app.use('/api/tests', testRouter)
 app.use('/api/movies', movieRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/groups', groupRouter)
+app.use('/api/review', reviewRouter)
 
 // Health check endpoint for database connectivity
 app.get('/api/health', async (req, res) => {

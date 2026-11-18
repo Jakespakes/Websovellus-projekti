@@ -4,10 +4,14 @@ import Navbar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
 import Footer from './components/home/Footer/Footer'
 import Login from "./components/login/Login"
+import GroupCreation from './group/GroupCreation'
+
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOption, setSearchOption] = useState('');
   const [showLogin, setShowLogin] = useState(false);
+  const [showGroupCreation, setShowGroupCreation] = useState(false);
+  const [groupSuccessMessage, setGroupSuccessMessage] = useState('');
 
   const [user, setUser] = useState(null);
   const [loginMode, setLoginMode] = useState('login');
@@ -60,6 +64,7 @@ function App() {
         <SideBar
           onLoginClick={() => openLogin('login')}
           onRegisterClick={() => openLogin('register')}
+          onCreateGroupClick={() => setShowGroupCreation(true)}
           user={user}
           onLogout={handleLogout}
         />
@@ -72,6 +77,11 @@ function App() {
         />
       </main>
 
+      {groupSuccessMessage && (
+            <div className="success-notification">
+              {groupSuccessMessage}
+            </div>
+          )}
       {showLogin && (
         <Login
           onClose={() => setShowLogin(false)}
@@ -79,11 +89,22 @@ function App() {
           initialMode={loginMode}
         />
       )}
+      {showGroupCreation && (
+        <GroupCreation
+          onClose={() => setShowGroupCreation(false)}
+          onSuccess={(groupName) => {
+            setShowGroupCreation(false);
+            setGroupSuccessMessage(
+              `Ryhmä "${groupName}" luotu onnistuneesti!`
+            );
 
-      <footer className="footer">
-        <Footer />
-      </footer>
-
+            setTimeout(() => {
+              setGroupSuccessMessage('');
+            }, 5000);
+          }}
+        />
+)}
+      <Footer />
     </div>
   )
 }

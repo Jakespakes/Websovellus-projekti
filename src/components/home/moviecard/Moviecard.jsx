@@ -1,6 +1,7 @@
 import "./Moviecard.css";
 import axios from "axios";
 import { useState } from 'react';
+import Moviemodal from "./Moviemodal.jsx";
 
 export default function Moviecard({ data, genres }) {
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -21,33 +22,35 @@ export default function Moviecard({ data, genres }) {
     }
 
     return (
-        <section className="moviecard">
-            {data.map((movie) => (
-                <div key={movie.id}>
-                    {movie.poster_path ? (
-                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}} onClick={()=> handleMovieClick(movie.id)} title={${movie.title} juliste`} />
-                    ) : (
-                        <p className="no-poster">No poster available</p>
-                    )}
-                    <div className="movie-details">
-                        <h2 className="movie-title"
-                            onClick={() => handleMovieClick(movie.id)}
-                        >{movie.title}</h2>
-                        <div className="movie-genres">
-                            {movie.genre_ids
-                                .map((id) => <p key={id}>{genreNamesById[id]}</p>)
-                            }
+        <>
+            <section className="moviecard">
+                {data.map((movie) => (
+                    <div key={movie.id}>
+                        {movie.poster_path ? (
+                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} onClick={()=> handleMovieClick(movie.id)} title={`${movie.title} juliste`} />
+                        ) : (
+                            <p className="no-poster">No poster availible</p>
+                        )}
+                        <div className="movie-details">
+                            <h2 className="movie-title"
+                                onClick={() => handleMovieClick(movie.id)}
+                            >{movie.title}</h2>
+                            <div className="movie-genres">
+                                {movie.genre_ids
+                                    .map((id) => <p key={id}>{genreNamesById[id]}</p>)
+                                }
+                            </div>
+                            <p className="movie-overview">{movie.overview}</p>
                         </div>
-                        <p className="movie-overview">{movie.overview}</p>
                     </div>
-                </div>
-
-            ))}
+                ))}
+            </section>
+            
             {selectedMovie && (
                 <Moviemodal
                     movie={selectedMovie}
                     onClose={() => setSelectedMovie(null)} />
             )}
-        </section>
+        </>
     );
 }

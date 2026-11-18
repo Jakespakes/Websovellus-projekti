@@ -3,6 +3,9 @@
     margin: 4rem auto;
     padding: 10px;
     text-align: center;
+    h1 {
+        color: #fff;
+    }
 }
 
 .input-field {

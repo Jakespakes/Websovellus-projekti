@@ -34,7 +34,7 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
         // Password confirmation
         if (isRegistering && password !== confirmPassword) 
         {
-            setMessage('Passwords do not match!');
+            setMessage('Salasanat eivät täsmää!');
             return;
         }
 
@@ -65,14 +65,14 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || 'Something went wrong.');
+                throw new Error(data.message || 'Jotain meni pieleen.');
             }
 
             setMessage(data.message || 'Success!');
 
             if (!isRegistering) {
                 if (!data.user) {
-                    throw new Error('We could not find an user with this information');
+                    throw new Error('Emme löytäneet käyttäjää näillä tunnuksilla.');
                 }
                 // Login successful.
                 onLogin(data.user);
@@ -113,7 +113,7 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                             <input
                                 type="text"
                                 id="username"
-                                placeholder="Enter your username"
+                                placeholder="Käyttäjänimi"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -126,7 +126,7 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                         <input
                             type="email"
                             id="email"
-                            placeholder="Enter your email"
+                            placeholder="Sähköposti"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -138,7 +138,7 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                         <input
                             type="password"
                             id="password"
-                            placeholder="Enter your password"
+                            placeholder="Salasana"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -148,12 +148,12 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                     {isRegistering && (
                         <div className="form-group">
                             <label htmlFor="confirm-password">
-                                Confirm Password
+                                Toista salasana
                             </label>
                             <input
                                 type="password"
                                 id="confirm-password"
-                                placeholder="Confirm your password"
+                                placeholder="Toista salasana"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
@@ -169,24 +169,24 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
 
                     <button type="submit" disabled={loading}>
                         {loading
-                            ? 'Please wait...'
+                            ? 'Odota hetki...'
                             : isRegistering 
-                                ? 'Register'
-                                : 'Login'}
+                                ? 'Rekisteröidy'
+                                : 'Kirjaudu sisään'}
                     </button>
                 </form>
 
                 <div className="auth-switch">
                     {isRegistering
-                        ? 'Already have an account?'
-                        : "Don't have an account?"}
+                        ? 'Onko sinulla jo käyttäjätili?'
+                        : 'Eikö sinulla ole käyttäjätiliä?'}
 
                     <button
                         type="button"
                         onClick={toggleMode}
                         disabled={loading}
                     >
-                        {isRegistering ? 'Login' : 'Register'}
+                        {isRegistering ? 'Kirjaudu sisään' : 'Rekisteröidy'}
                     </button>
                 </div>
             </div>
