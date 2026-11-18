@@ -1,24 +1,39 @@
 import React from 'react'
+import axios from 'axios'
 import {useState} from 'react'
-export default function Moviereview({movieID, onSubmit}) {
-const [review, setReview] = useState("")
+export default function Moviereview({movie_id, onSubmit}) {
+const [comment, setComment] = useState("")
 const [rating, setRating] = useState(0)
 const [madeReview, setmadeReview] = useState(false)
 
 
-const handleSubmit = () => {
-    if (rating === 0 || review.trim() === ""){
+const handleSubmit = async () => {
+    if (rating === 0 || comment.trim() === ""){
         return
     }
-    onSubmit({
-        movieID,
-        rating,
-        review
-    })
 
+    try {
+        const response = await axios.post("/api/review/create", {
+            movie_id,
+            rating,
+            comment
+        })
+    
+    console.log("Review:", response.data)
+    
+    
     setRating(0)
-    setReview("")
+    setComment("")
     setmadeReview(true)
+    } catch (error){
+        console.error("Couldn't save review", error)
+    } finally{
+        onSubmit({
+        movie_id,
+        rating,
+        comment
+    })
+    }
 } 
 if (madeReview){
     return(
@@ -43,8 +58,8 @@ if (madeReview){
         <div>
         <textarea
             placeholder="Kirjoita tänne."
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
             />
         </div>
         <div>

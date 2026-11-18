@@ -27,7 +27,7 @@ export default function Moviecard({ data, genres }) {
                 {data.map((movie) => (
                     <div key={movie.id}>
                         {movie.poster_path ? (
-                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} onClick={()=> handleMovieClick(movie.id)} />
+                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} onClick={()=> handleMovieClick(movie.id)} title={`${movie.title} juliste`} />
                         ) : (
                             <p className="no-poster">No poster availible</p>
                         )}

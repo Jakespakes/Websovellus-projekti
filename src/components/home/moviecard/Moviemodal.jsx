@@ -59,7 +59,7 @@ export default function Moviemodal({movie, onClose}) {
                             </div>
 
                             <div>
-                                <Moviereview movieID={movie.result.result.id} onSubmit={(reviewData) => {
+                                <Moviereview movie_id={movie.result.result.id} onSubmit={(reviewData) => {
                                 console.log(reviewData)}} />
                             </div>
                             {/*TODO: Make a list of actors and of the cast that the user can scroll through with arrows! */}

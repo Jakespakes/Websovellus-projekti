@@ -7,7 +7,7 @@ export async function register(req, res, next) {
     const { username, email, password } = req.body;
     await createUser(username, email, password);
 
-    res.status(201).json({message: 'Käyttäjä luotu', user});
+    res.status(201).json({message: 'Käyttäjä luotu'});
   } catch (error) {
     next(error);
   }
