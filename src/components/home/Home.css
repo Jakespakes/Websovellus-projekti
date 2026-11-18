@@ -1,8 +1,6 @@
 .movieList {
-    width: calc(90%-400px);
+    width: 100%;
     margin: 4rem auto;
-    margin-left: 15.6;
-    margin-right: 9.3;
     padding: 10px;
     text-align: center;
 }
@@ -19,4 +17,9 @@
     img {
         width: 10rem;
     }
+}
+
+.searched-movies-list,
+.searched-person-list {
+    margin-top: 6rem;
 }

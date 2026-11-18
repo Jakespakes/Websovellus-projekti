@@ -15,7 +15,7 @@ export default function Moviecard({ data, genres }) {
             const response = await axios.get(`/api/movies/${id}/credits`)
             setSelectedMovie(response.data);
             console.log(response.data);
-        } catch(err) {
+        } catch (err) {
             console.log("Could not fetch movie details")
         }
     }
@@ -25,8 +25,8 @@ export default function Moviecard({ data, genres }) {
             {data.map((movie) => (
                 <div key={movie.id}>
                     {movie.poster_path ? (
-                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}/>
-                    ):(
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}} onClick={()=> handleMovieClick(movie.id)} title={${movie.title} juliste`} />
+                    ) : (
                         <p className="no-poster">No poster available</p>
                     )}
                     <div className="movie-details">
@@ -35,13 +35,19 @@ export default function Moviecard({ data, genres }) {
                         >{movie.title}</h2>
                         <div className="movie-genres">
                             {movie.genre_ids
-                                .map((id) => <p key={id}>{ genreNamesById[id] }</p>)
+                                .map((id) => <p key={id}>{genreNamesById[id]}</p>)
                             }
                         </div>
                         <p className="movie-overview">{movie.overview}</p>
                     </div>
                 </div>
+
             ))}
+            {selectedMovie && (
+                <Moviemodal
+                    movie={selectedMovie}
+                    onClose={() => setSelectedMovie(null)} />
+            )}
         </section>
     );
 }

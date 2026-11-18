@@ -18,7 +18,7 @@ export default function Home({ searchQuery, searchOption }) {
       try {
         const response = await axios.get('/api/movies/genres');
         setGenres(response.data)
-      } catch(err) {
+      } catch (err) {
         setError(err.message)
       }
     }
@@ -30,11 +30,11 @@ export default function Home({ searchQuery, searchOption }) {
   const fetchData = async () => {
     setLoading(true)
     setError(null)
-    
+
     try {
-      const response = await axios.get('/api/movies/popular') 
+      const response = await axios.get('/api/movies/popular')
       setData(response.data)
-      } catch (err) {
+    } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
@@ -70,7 +70,7 @@ export default function Home({ searchQuery, searchOption }) {
         const response = await axios.get(`/api/movies/search/movie?q=${searchQuery}`);
 
         setSearchedMovies(response.data);
-      } catch(err) {
+      } catch (err) {
         console.error(err);
         setError("Movie search failed");
       } finally {
@@ -87,7 +87,7 @@ export default function Home({ searchQuery, searchOption }) {
 
         setSearchedPeople(response.data);
         console.log(response.data);
-      } catch(err) {
+      } catch (err) {
         console.error(err);
         setError("People search failed");
       } finally {
@@ -96,21 +96,21 @@ export default function Home({ searchQuery, searchOption }) {
     }
   }
 
-  if(loading) return <main><h1>Downloading movies...</h1></main>
+  if (loading) return <main><h1>Downloading movies...</h1></main>
 
   return (
     <div>
       {error ? <p className="message error" role="alert">{error}</p> : null}
       <div className="searched-movies-list">
-        <Moviecard 
-          data={ searchedMovies }
-          genres={ genres }
+        <Moviecard
+          data={searchedMovies}
+          genres={genres}
         />
       </div>
-      
+
       <div className="searched-person-list">
-        <Personcard 
-          data={ searchedPeople }
+        <Personcard
+          data={searchedPeople}
         />
       </div>
 
@@ -118,8 +118,8 @@ export default function Home({ searchQuery, searchOption }) {
         <h1>Popular Movies</h1>
         <div>
           <Moviecard
-            data={ data }
-            genres={ genres }
+            data={data}
+            genres={genres}
           />
         </div>
       </div>
