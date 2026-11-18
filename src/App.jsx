@@ -12,6 +12,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showGroupCreation, setShowGroupCreation] = useState(false);
   const [groupSuccessMessage, setGroupSuccessMessage] = useState('');
+  const [groupsRefreshTrigger, setGroupsRefreshTrigger] = useState(0);
 
   const [user, setUser] = useState(null);
   const [loginMode, setLoginMode] = useState('login');
@@ -67,6 +68,7 @@ function App() {
           onCreateGroupClick={() => setShowGroupCreation(true)}
           user={user}
           onLogout={handleLogout}
+          refreshTrigger={groupsRefreshTrigger}
         />
       </aside>
 
@@ -94,6 +96,7 @@ function App() {
           onClose={() => setShowGroupCreation(false)}
           onSuccess={(groupName) => {
             setShowGroupCreation(false);
+            setGroupsRefreshTrigger(prev => prev + 1);
             setGroupSuccessMessage(
               `Ryhmä "${groupName}" luotu onnistuneesti!`
             );

@@ -76,7 +76,7 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
               className="login-button"
               onClick={onLogout}
             >
-              LOGOUT
+              Kirjaudu ulos
             </button>
           </div>
         ) : (
@@ -84,7 +84,7 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
             className="login-button"
             onClick={onLoginClick}
           >
-           Login
+           Kirjaudu sisään
           </button>
         )}
       </div>

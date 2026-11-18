@@ -68,3 +68,22 @@
   background-color: #201abf;
   color: white;
 }
+
+.groupList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    color: white;
+}
+
+.groupList h4 {
+    margin: 0;
+}
+
+.groupCard {
+    padding: 0.6rem;
+    background-color: #35116b;
+    border-radius: 5px;
+    overflow-wrap: break-word;
+}
