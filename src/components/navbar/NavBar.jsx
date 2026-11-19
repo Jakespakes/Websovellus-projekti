@@ -1,6 +1,6 @@
 import "./NavBar.css"
 
-export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, searchOption, setSearchOption, user, onLogout }) {
+export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, user, onLogout }) {
   const handleSubmit = (e) => {
     e.preventDefault();
   }
@@ -37,40 +37,20 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
         </ul>
 
         <form className="search-form" onSubmit={handleSubmit}>
-          <label htmlFor="movie-search">Search for a movie</label>
+          <label htmlFor="movie-search">Etsi mitä vain</label>
           <input
             id="movie-search"
-            placeholder="Search for a movie"
+            placeholder="Etsi mitä vain"
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="search-input-field"
           />
-          <label>
-            <input
-              type="checkbox"
-              name="searchType"
-              value="movie"
-              checked={searchOption === "movie"}
-              onChange={e => setSearchOption(e.target.value)}
-            />
-            Movie
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="searchType"
-              value="person"
-              checked={searchOption === "person"}
-              onChange={e => setSearchOption(e.target.value)}
-            />
-            Person
-          </label>
         </form>
 
         {user ? (
           <div className="user-section">
-            <span>Welcome, {user.username} </span>
+            <span>Tervetuloa, {user.username} </span>
 
             <button
               className="login-button"
