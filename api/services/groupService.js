@@ -1,4 +1,15 @@
-import {createGroupWithMembers, getGroupsByUserId, getOwnedGroupsByUserId, deleteGroup, getGroupByGroupId, updateOwnedGroup} from '../models/groupModel.js'
+import {
+    createGroupWithMembers, 
+    getGroupsByUserId, 
+    getOwnedGroupsByUserId, 
+    deleteGroup, 
+    getGroupByGroupId, 
+    updateOwnedGroup, 
+    createJoinRequest, 
+    getJoinRequestsByGroupId, 
+    getJoinRequestsById, 
+    processJoinRequest
+} from '../models/groupModel.js'
 
 export async function createNewGroup(name, description, ownerId) {
 
@@ -66,4 +77,58 @@ export async function deleteOwnedGroup(groupId, userId) {
         throw error;
     }
     return await deleteGroup(groupId);
+}
+
+export async function sendJoinRequest(groupId, userId){
+
+    const userGroups = await getGroupsByUserId(userId);
+    const isMember = userGroups.find(group => group.id === Number(groupId));
+
+    if (isMember){
+        const error = new Error('Olet jo ryhmän jäsen');
+        error.status = 409;
+        throw error;
+    }
+
+    return await createJoinRequest(groupId, userId);
+}
+
+export async function getGroupJoinRequests(groupId, ownerId){
+    const ownedGroups = await getOwnedGroupsByUserId(ownerId);
+    const ownsGroup = ownedGroups.some(group => group.id === Number(groupId));
+
+    if (!ownsGroup) {
+        const error = new Error('Ainoastaan ryhmän omistaja voi nähdä liittymispyynnöt');
+        error.status = 403;
+        throw error;
+    }
+
+    return await getJoinRequestsByGroupId(groupId);
+}
+
+export async function handleJoinRequest(groupId, requestId, ownerId, status){
+    if (!['approved', 'rejected'].includes(status)){
+        const error = new Error('Liittymispyynnön täytyy olla hyväksytty tai hylätty');
+        error.status = 400;
+        throw error;
+    }
+
+    const ownedGroups = await getOwnedGroupsByUserId(ownerId);
+    const ownsGroup = ownedGroups.some(group => group.id === Number(groupId));
+
+    if (!ownsGroup){
+        const error = new Error('Ainoastaan ryhmän omistaja voi käsitellä liittymispyyntöjä')
+        error.status = 403;
+        throw error;
+    }
+
+    const request = await getJoinRequestsById(requestId);
+
+    if (!request) {
+        const error = new Error('Liittymispyyntöä ei löytynyt');
+        error.status = 404;
+        throw error;
+    }
+
+    return await processJoinRequest(requestId, status);
 }
