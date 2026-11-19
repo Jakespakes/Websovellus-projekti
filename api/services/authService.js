@@ -1,5 +1,14 @@
 import bcrypt from 'bcrypt';
-import {createUserRecord, findUserByEmail, findUserByUsername, updateUser, updatePassword, findUserById, findUserWithPasswordById, deleteUser} from '../models/userModel.js';
+import {
+    createUserRecord, 
+    findUserByEmail, 
+    findUserByUsername, 
+    updateUser, 
+    updatePassword, 
+    findUserById, 
+    findUserWithPasswordById, 
+    deleteUser
+} from '../models/userModel.js';
 import {getOwnedGroupsByUserId} from '../models/groupModel.js'
 
 /** Luo uuden käyttäjän*/
