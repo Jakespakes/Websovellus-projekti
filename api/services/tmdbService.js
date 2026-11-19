@@ -48,6 +48,22 @@ export const searchMovies = async (query) => {
     return result.results;
  }
 
+ export const searchAnything = async (query) => {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/search/multi?include_adult=false&language=en-US&page=1&query=${query}`,
+        {headers}
+    );
+
+    if (!response.ok) {
+        const error = new Error(`Movie API returned ${response.status}`);
+        error.status = 502;
+        throw error;
+    }
+
+    const result = await response.json();
+    return result.results;
+ }
+
 export const getMovieGenres = async () => {
     const response = await fetch(
         'https://api.themoviedb.org/3/genre/movie/list?language=en', 

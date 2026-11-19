@@ -1,10 +1,16 @@
-export default function Personcard({ data }) {
+export default function Personcard({ data, knownFor }) {
+    const handlePersonClick = async (id) => {
+        console.log(id);
+    }
+
     return (
         <section>
             {data.map((person) => (
                 <div key={person.id} className="personcard">
                     {person.profile_path ? (
-                        <img src={`https://image.tmdb.org/t/p/w500${person.profile_path}`} />
+                        <img src={`https://image.tmdb.org/t/p/w500${person.profile_path}`} 
+                            onClick={() => handlePersonClick(person.id)}
+                        />
                     ):(
                         <p className="no-profile">No picture availible</p>
                     )}
