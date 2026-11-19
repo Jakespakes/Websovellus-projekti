@@ -5,6 +5,7 @@ import SideBar from './components/sidebar/SideBar'
 import Footer from './components/home/Footer/Footer'
 import Login from "./components/login/Login"
 import GroupCreation from './group/GroupCreation'
+import MobileFooter from './Mobilefooter/MobileFooter'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,7 +14,7 @@ function App() {
   const [showGroupCreation, setShowGroupCreation] = useState(false);
   const [groupSuccessMessage, setGroupSuccessMessage] = useState('');
   const [groupsRefreshTrigger, setGroupsRefreshTrigger] = useState(0);
-
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [loginMode, setLoginMode] = useState('login');
 
@@ -69,6 +70,7 @@ function App() {
           user={user}
           onLogout={handleLogout}
           refreshTrigger={groupsRefreshTrigger}
+          isOpen={mobileSidebarOpen}
         />
       </aside>
 
@@ -80,10 +82,10 @@ function App() {
       </main>
 
       {groupSuccessMessage && (
-            <div className="success-notification">
-              {groupSuccessMessage}
-            </div>
-          )}
+        <div className="success-notification">
+          {groupSuccessMessage}
+        </div>
+      )}
       {showLogin && (
         <Login
           onClose={() => setShowLogin(false)}
@@ -106,7 +108,12 @@ function App() {
             }, 5000);
           }}
         />
-)}
+      )}
+      <MobileFooter
+        onMenuClick={() =>
+          setMobileSidebarOpen(!mobileSidebarOpen)
+        }
+      />
       <Footer />
     </div>
   )

@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
 }
-
+/*Used to change how main part of the window works, sets limits to where header, footer and sidebar are */
 .layout {
   display: grid;
 
@@ -17,7 +17,7 @@
 }
 
 
-
+/*Changes main grid that contains moviecarousels*/
 .content {
   grid-area: main;
 

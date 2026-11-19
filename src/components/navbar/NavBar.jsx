@@ -12,29 +12,7 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
           Navbar scroll
         </a>
 
-        <ul className="nav-links">
-          <li>
-            <a href="#action1">Home</a>
-          </li>
-          <li>
-            <a href="#action2">Link</a>
-          </li>
-
-          <li className="dropdown">
-            <button className="dropdown-btn">
-              Dropdown ▼
-            </button>
-
-
-            <div className="dropdown-content">
-              <a href="#action3">Action</a>
-              <a href="#action4">Another action</a>
-              <hr />
-              <a href="#action5">Something else here</a>
-            </div>
-          </li>
-
-        </ul>
+        
 
         <form className="search-form" onSubmit={handleSubmit}>
           <label htmlFor="movie-search">Search for a movie</label>

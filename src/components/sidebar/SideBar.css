@@ -1,6 +1,6 @@
 .SideBar {
   position: fixed;
-  top: 4.4rem;
+  top: 5rem;
   left: 0;
 
   width: 2.8rem;
@@ -10,6 +10,41 @@
 
   transition: width 0.3s ease;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+
+  .SideBar {
+    display: none;
+  }
+
+  .SideBar.open {
+    display: block;
+
+    position: fixed;
+    left: 0;
+    top: 6rem;
+
+    width: min(80vw, 320px) !important;
+    height: calc(100vh - 7.9rem);
+
+    overflow-y: auto;
+
+    background-color: #020655;
+
+    z-index: 9999;
+  }
+
+  .SideBar.open .guestPanel,
+  .SideBar.open .userPanel {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .SideBar:hover,
+  .SideBar:not(:hover) {
+    width: min(80vw, 320px) !important;
+  }
+
 }
 
 .SideBar:hover {
@@ -70,20 +105,20 @@
 }
 
 .groupList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1rem;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  color: white;
 }
 
 .groupList h4 {
-    margin: 0;
+  margin: 0;
 }
 
 .groupCard {
-    padding: 0.6rem;
-    background-color: #35116b;
-    border-radius: 5px;
-    overflow-wrap: break-word;
+  padding: 0.6rem;
+  background-color: #35116b;
+  border-radius: 5px;
+  overflow-wrap: break-word;
 }
