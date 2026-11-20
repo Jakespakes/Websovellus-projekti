@@ -9,7 +9,7 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, user
     <nav className="navbar">
       <div className="container">
         <a className="navbar-brand" href="/">
-          <img src="../public/leffapuntari_logo.png" alt="Home button"/>
+          <img src="/leffapuntari_logo.png" alt="Home button"/>
         </a>
 
         <form className="search-form" onSubmit={handleSubmit}>
