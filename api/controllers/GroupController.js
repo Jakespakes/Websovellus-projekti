@@ -6,7 +6,10 @@ import {
     deleteOwnedGroup,
     sendJoinRequest,
     getGroupJoinRequests,
-    handleJoinRequest
+    handleJoinRequest,
+    getGroupMembers,
+    removeGroupMember,
+    changeMemberRole
 } from '../services/groupService.js'
 
 export async function createGroup(req, res, next) {
@@ -81,6 +84,33 @@ export async function updateJoinRequest(req, res, next) {
     try {
         const request = await handleJoinRequest(req.params.id, req.params.requestId, req.user.id, req.body.status);
         res.status(201).json({message: 'Liittymispyyntö käsitelty', request});
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function getMembers(req, res, next){
+    try {
+        const members = await getGroupMembers(req.params.id);
+        res.json(members);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function deleteMember(req, res, next){
+    try {
+        await removeGroupMember(req.params.id, req.params.userId, req.user.id);
+        res.status(200).json({message: 'Jäsen poistettu'});
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function updateMemberRole(req, res, next){
+    try {
+        const member = await changeMemberRole(req.params.id, req.params.userId, req.body.role, req.user.id);
+        res.json({message: 'Rooli päivitetty', member});
     } catch (error) {
         next(error);
     }
