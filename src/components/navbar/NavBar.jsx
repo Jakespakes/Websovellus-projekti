@@ -1,6 +1,6 @@
 import "./NavBar.css"
 
-export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, searchOption, setSearchOption, user, onLogout }) {
+export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, user, onLogout }) {
   const handleSubmit = (e) => {
     e.preventDefault();
   }
@@ -25,7 +25,7 @@ export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, sear
 
         {user ? (
           <div className="user-section">
-            <span>Welcome, {user.username} </span>
+            <span>Tervetuloa, {user.username} </span>
 
             <button
               className="login-button"
