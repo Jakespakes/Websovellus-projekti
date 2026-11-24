@@ -43,12 +43,13 @@ export const fetchSearchPerson = async (req, res, next) => {
 export const fetchAnything = async (req, res, next) => {
   try {
     const query = req.query.q;
+    const year = query.match(/\d+/g);
 
     if (!query) {
       return res.json([]);
     }
 
-    const result = await searchAnything(query);
+    const result = await searchAnything(query, year);
     res.status(200).json(result);
   } catch(error)  {
     next(error);
