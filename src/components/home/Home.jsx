@@ -58,7 +58,7 @@ export default function Home({ searchQuery }) {
       setSearchedAnything(response.data);
     } catch(err) {
       console.error(err);
-      setError("Searching failed");
+      setError("Haku epäonnistui");
     } finally {
       setLoading(false);
     }

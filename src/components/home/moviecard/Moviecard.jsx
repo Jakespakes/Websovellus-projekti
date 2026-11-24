@@ -17,7 +17,7 @@ export default function Moviecard({ data, genres }) {
             setSelectedMovie(response.data);
             console.log(response.data);
         } catch (err) {
-            console.log("Could not fetch movie details")
+            console.log("Elokuvien hakeminen ei onnistunut")
         }
     }
 
@@ -26,11 +26,9 @@ export default function Moviecard({ data, genres }) {
             <section className="moviecard">
                 {data.map((movie) => (
                     <div key={movie.id}>
-                        {movie.poster_path ? (
-                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} onClick={()=> handleMovieClick(movie.id)} title={`${movie.title} juliste`} />
-                        ) : (
-                            <p className="no-poster">No poster availible</p>
-                        )}
+                        {movie.poster_path 
+                            ? (<img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} onClick={()=> handleMovieClick(movie.id)} title={`${movie.title} juliste`} />) 
+                            : (<p className="no-poster">Julistetta ei saatavilla</p>)}
                         <div className="movie-details">
                             <h2 className="movie-title"
                                 onClick={() => handleMovieClick(movie.id)}
@@ -40,7 +38,9 @@ export default function Moviecard({ data, genres }) {
                                     .map((id) => <p key={id}>{genreNamesById[id]}</p>)
                                 }
                             </div>
-                            <p className="movie-overview">{movie.overview}</p>
+                            {movie.overview 
+                                ? (<p className="movie-overview">{movie.overview}</p>) 
+                                : (<p className="movie-overview">Kuvausta ei saatavilla</p>)}
                         </div>
                     </div>
                 ))}
@@ -49,7 +49,8 @@ export default function Moviecard({ data, genres }) {
             {selectedMovie && (
                 <Moviemodal
                     movie={selectedMovie}
-                    onClose={() => setSelectedMovie(null)} />
+                    onClose={() => setSelectedMovie(null)} 
+                />
             )}
         </>
     );
