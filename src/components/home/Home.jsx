@@ -3,6 +3,7 @@ import axios from 'axios'
 import Moviecard from './moviecard/Moviecard.jsx'
 import Personcard from './personcard/Personcard.jsx'
 import "./Home.css"
+import Container from 'react-bootstrap/Container'
 
 export default function Home({ searchQuery, searchOption }) {
   const [data, setData] = useState([]);
@@ -99,8 +100,14 @@ export default function Home({ searchQuery, searchOption }) {
   if (loading) return <main><h1>Downloading movies...</h1></main>
 
   return (
-    <div>
-      {error ? <p className="message error" role="alert">{error}</p> : null}
+    <Container fluid>
+
+      {error ? (
+        <p className="message error" role="alert">
+          {error}
+        </p>
+      ) : null}
+
       <div className="searched-movies-list">
         <Moviecard
           data={searchedMovies}
@@ -114,15 +121,15 @@ export default function Home({ searchQuery, searchOption }) {
         />
       </div>
 
-      <div className='movieList'>
+      <div className="movieList">
         <h1>Popular Movies</h1>
-        <div>
-          <Moviecard
-            data={data}
-            genres={genres}
-          />
-        </div>
+
+        <Moviecard
+          data={data}
+          genres={genres}
+        />
       </div>
-    </div>
+
+    </Container>
   )
 }

@@ -2,10 +2,14 @@ import { useState } from 'react'
 import Home from './components/home/Home'
 import Navbar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
-import Footer from './components/home/Footer/Footer'
+import Footer from './components/Footer/Footer'
 import Login from "./components/login/Login"
 import GroupCreation from './group/GroupCreation'
 import MobileFooter from './Mobilefooter/MobileFooter'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -48,9 +52,10 @@ function App() {
   };
 
   return (
-    <div className="layout">
+  <Container fluid="xl">
 
-      <header className="header">
+    <Row>
+      <Col>
         <Navbar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -60,9 +65,12 @@ function App() {
           user={user}
           onLogout={handleLogout}
         />
-      </header>
+      </Col>
+    </Row>
 
-      <aside className="sidebar">
+    <Row>
+
+      <Col xs={12} md={3} lg={2}>
         <SideBar
           onLoginClick={() => openLogin('login')}
           onRegisterClick={() => openLogin('register')}
@@ -71,52 +79,64 @@ function App() {
           onLogout={handleLogout}
           refreshTrigger={groupsRefreshTrigger}
           isOpen={mobileSidebarOpen}
+          onClose={() => setMobileSidebarOpen(false)}
         />
-      </aside>
+      </Col>
 
-      <main>
+      <Col xs={12} md={9} lg={10}>
         <Home
           searchQuery={searchQuery}
           searchOption={searchOption}
         />
-      </main>
+      </Col>
 
-      {groupSuccessMessage && (
-        <div className="success-notification">
-          {groupSuccessMessage}
-        </div>
-      )}
-      {showLogin && (
-        <Login
-          onClose={() => setShowLogin(false)}
-          onLogin={handleLogin}
-          initialMode={loginMode}
-        />
-      )}
-      {showGroupCreation && (
-        <GroupCreation
-          onClose={() => setShowGroupCreation(false)}
-          onSuccess={(groupName) => {
-            setShowGroupCreation(false);
-            setGroupsRefreshTrigger(prev => prev + 1);
-            setGroupSuccessMessage(
-              `Ryhmä "${groupName}" luotu onnistuneesti!`
-            );
+    </Row>
 
-            setTimeout(() => {
-              setGroupSuccessMessage('');
-            }, 5000);
-          }}
-        />
-      )}
-      <MobileFooter
-        onMenuClick={() =>
-          setMobileSidebarOpen(!mobileSidebarOpen)
-        }
+    <Row>
+      <Col>
+        <Footer/>
+      </Col>
+    </Row>
+
+    {groupSuccessMessage && (
+      <div className="success-notification">
+        {groupSuccessMessage}
+      </div>
+    )}
+
+    {showLogin && (
+      <Login
+        onClose={() => setShowLogin(false)}
+        onLogin={handleLogin}
+        initialMode={loginMode}
       />
-      <Footer />
-    </div>
-  )
+    )}
+
+    {showGroupCreation && (
+      <GroupCreation
+        onClose={() => setShowGroupCreation(false)}
+        onSuccess={(groupName) => {
+          setShowGroupCreation(false);
+          setGroupsRefreshTrigger(prev => prev + 1);
+          setGroupSuccessMessage(
+            `Ryhmä "${groupName}" luotu onnistuneesti!`
+          );
+
+          setTimeout(() => {
+            setGroupSuccessMessage('');
+          }, 5000);
+        }}
+      />
+    )}
+
+    <MobileFooter
+      onMenuClick={() =>
+        setMobileSidebarOpen(!mobileSidebarOpen)
+      }
+    />
+
+  </Container>
+)
 }
 
 export default App

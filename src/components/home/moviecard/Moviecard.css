@@ -1,34 +1,35 @@
 .moviecard {
     display: flex;
-    flex-direction: row;
-
     overflow-x: auto;
 
-    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
 
-    margin-left: 100px;
-    margin-right: 150px;
-
+    width: min(100vw, 1000px);
     gap: 1rem;
     padding: 1rem;
 
-    align-items: stretch;
+
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
 
     .moviecard {
-        margin: 0;
         padding: 0.5rem;
     }
 
-    .moviecard > div {
+    .moviecard>div {
 
-        width: 95vw;
-        height: auto;
+        width: calc(100vw - 2rem);
 
-        display: flex;
+        border: 2px solid rgb(2, 2, 2);
+
+        background: linear-gradient(90deg,
+            #3b175f 0%,
+            #2d406c 100%);
+
         flex-direction: column;
+        display: flex;
         align-items: center;
     }
 
@@ -36,36 +37,28 @@
 
         width: 18rem;
         max-width: 100%;
-        height: auto;
 
         display: block;
         margin: 0 auto;
     }
 
     .movie-details {
-        width: 100%;
+        text-align: left;
     }
 }
 
-.moviecard > div {
+.moviecard>div {
     flex-shrink: 0;
+    width: 500px;
 
-    width: min(70vw, 600px);
-    height: 35rem;
 
-    padding: 1.4rem;
     border: 2px solid rgb(2, 2, 2);
-    margin: 1.4rem;
-    
+
     background: #c2c2c2;
-    background: linear-gradient(90deg, #3b175f 0%, #2d406c  100%);
+    background: linear-gradient(90deg, #3b175f 0%, #2d406c 100%);
 
     display: flex;
-    gap: 1.4rem;
-    h2 p {
-        display: flex;
-        flex-direction: column;
-    }
+
 }
 
 .moviecard img {
@@ -77,9 +70,8 @@
 .movie-details {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-    min-width: 0;
+    justify-content: flex-start;
+    gap: 1rem;
 }
 
 .movie-genres {
@@ -88,6 +80,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    justify-content: flex-start;
+
     p {
         background-color: rgb(183, 182, 182);
         border: 2px solid rgb(3, 3, 3);
@@ -102,12 +96,15 @@
 }
 
 .movie-overview {
-    background-color: rgb(183, 182, 182, 0.5);
+    background-color: rgba(183, 182, 182, 0.5);
+
     padding: 0.6rem;
+
     border-radius: 1rem;
-    border: 2px solid rgb(0, 0, 0);
+
+    border: 2px solid black;
 }
 
-.movie-title{
+.movie-title {
     cursor: pointer;
 }

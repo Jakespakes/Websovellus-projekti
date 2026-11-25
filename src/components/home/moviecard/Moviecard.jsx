@@ -2,6 +2,10 @@ import "./Moviecard.css";
 import axios from "axios";
 import { useState } from 'react';
 import Moviemodal from "./Moviemodal.jsx";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
 export default function Moviecard({ data, genres }) {
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -25,27 +29,55 @@ export default function Moviecard({ data, genres }) {
         <>
             <section className="moviecard">
                 {data.map((movie) => (
-                    <div key={movie.id}>
-                        {movie.poster_path ? (
-                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} onClick={()=> handleMovieClick(movie.id)} title={`${movie.title} juliste`} />
-                        ) : (
-                            <p className="no-poster">No poster availible</p>
-                        )}
-                        <div className="movie-details">
-                            <h2 className="movie-title"
-                                onClick={() => handleMovieClick(movie.id)}
-                            >{movie.title}</h2>
-                            <div className="movie-genres">
-                                {movie.genre_ids
-                                    .map((id) => <p key={id}>{genreNamesById[id]}</p>)
-                                }
-                            </div>
-                            <p className="movie-overview">{movie.overview}</p>
-                        </div>
-                    </div>
+                    <Card key={movie.id} className="movie-card">
+
+                        <Row className="g-0">
+
+                            <Col xs={12} lg={5}>
+                                {movie.poster_path ? (
+                                    <Card.Img
+                                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                        onClick={() => handleMovieClick(movie.id)}
+                                        title={`${movie.title} juliste`}
+                                    />
+                                ) : (
+                                    <p className="no-poster">
+                                        No poster available
+                                    </p>
+                                )}
+                            </Col>
+
+                            <Col xs={12} lg={8}>
+                                <Card.Body>
+
+                                    <Card.Title
+                                        className="movie-title"
+                                        onClick={() => handleMovieClick(movie.id)}
+                                    >
+                                        {movie.title}
+                                    </Card.Title>
+
+                                    <div className="movie-genres">
+                                        {movie.genre_ids.map((id) => (
+                                            <Badge bg="secondary" key={id}>
+                                                {genreNamesById[id]}
+                                            </Badge>
+                                        ))}
+                                    </div>
+
+                                    <Card.Text className="movie-overview">
+                                        {movie.overview}
+                                    </Card.Text>
+
+                                </Card.Body>
+                            </Col>
+
+                        </Row>
+
+                    </Card>
                 ))}
             </section>
-            
+
             {selectedMovie && (
                 <Moviemodal
                     movie={selectedMovie}

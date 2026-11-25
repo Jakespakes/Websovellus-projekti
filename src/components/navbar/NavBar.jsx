@@ -1,71 +1,107 @@
-import "./NavBar.css"
+import "./NavBar.css";
 
-export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, searchOption, setSearchOption, user, onLogout }) {
+import BsNavbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
+
+export default function NavBar({
+  searchQuery,
+  setSearchQuery,
+  onLoginClick,
+  searchOption,
+  setSearchOption,
+  user,
+  onLogout
+}) {
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
-    <nav className="navbar">
-      <div className="container">
-        <a className="navbar-brand" href="/">
-          Navbar scroll
-        </a>
+    <BsNavbar
+      variant="dark"
+      expand="lg"
+      fixed="top"
+      className="movie-NavBar"
+    >
+      <Container>
 
-        
+        <BsNavbar.Brand href="/">
+          Movie Database
+        </BsNavbar.Brand>
 
-        <form className="search-form" onSubmit={handleSubmit}>
-          <label htmlFor="movie-search">Search for a movie</label>
-          <input
-            id="movie-search"
-            placeholder="Search for a movie"
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            className="search-input-field"
-          />
-          <label>
-            <input
-              type="checkbox"
-              name="searchType"
-              value="movie"
-              checked={searchOption === "movie"}
-              onChange={e => setSearchOption(e.target.value)}
-            />
-            Movie
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="searchType"
-              value="person"
-              checked={searchOption === "person"}
-              onChange={e => setSearchOption(e.target.value)}
-            />
-            Person
-          </label>
-        </form>
+        <BsNavbar.Toggle aria-controls="navbar-content" />
 
-        {user ? (
-          <div className="user-section">
-            <span>Welcome, {user.username} </span>
+        <div className="d-flex align-items-center gap-3 flex-wrap w-100">
 
-            <button
-              className="login-button"
-              onClick={onLogout}
-            >
-              Kirjaudu ulos
-            </button>
-          </div>
-        ) : (
-          <button
-            className="login-button"
-            onClick={onLoginClick}
+          <form
+            className="d-flex gap-2 align-items-center flex-wrap"
+            onSubmit={handleSubmit}
           >
-           Kirjaudu sisään
-          </button>
-        )}
-      </div>
-    </nav >
+
+            <input
+              className="form-control"
+              placeholder="Search for a movie"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+
+            <label className="text-white">
+              <input
+                type="radio"
+                value="movie"
+                checked={searchOption === "movie"}
+                onChange={(e) => setSearchOption(e.target.value)}
+              />
+              {" "}Movie
+            </label>
+
+            <label className="text-white">
+              <input
+                type="radio"
+                value="person"
+                checked={searchOption === "person"}
+                onChange={(e) => setSearchOption(e.target.value)}
+              />
+              {" "}Person
+            </label>
+
+          </form>
+
+          <Nav className="ms-auto">
+
+            {user ? (
+              <div className="d-flex align-items-center gap-2">
+
+                <span className="text-white">
+                  Welcome, {user.username}
+                </span>
+
+                <Button
+                  variant="outline-light"
+                  onClick={onLogout}
+                >
+                  Kirjaudu ulos
+                </Button>
+
+              </div>
+            ) : (
+              <Button
+                variant="outline-light"
+                onClick={onLoginClick}
+              >
+                Kirjaudu sisään
+              </Button>
+            )}
+
+          </Nav>
+
+        </div>
+      
+      </Container>
+    </BsNavbar>
   );
 }
