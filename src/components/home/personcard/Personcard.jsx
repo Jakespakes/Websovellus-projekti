@@ -12,7 +12,7 @@ export default function Personcard({ data, knownFor }) {
                             onClick={() => handlePersonClick(person.id)}
                         />
                     ):(
-                        <p className="no-profile">No picture availible</p>
+                        <p className="no-profile">Kuvaa ei saatavilla</p>
                     )}
                     <div className="person-details">
                         <h2 className="person-name">{person.original_name}</h2>
