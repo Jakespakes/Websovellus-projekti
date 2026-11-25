@@ -1,4 +1,4 @@
-import { getPopularMovies, searchMovies, searchPerson, getMovieGenres, getMovieCredits } from '../services/tmdbService.js'
+import { getPopularMovies, searchMovies, searchPerson, searchAnything, getMovieGenres, getMovieCredits } from '../services/tmdbService.js'
 
 export const fetchPopularMovies = async (req, res, next) => {
   try {
@@ -35,6 +35,23 @@ export const fetchSearchPerson = async (req, res, next) => {
     const result = await searchPerson(query);
     res.status(200).json(result);
   } catch(error) {
+    next(error);
+  }
+}
+
+
+export const fetchAnything = async (req, res, next) => {
+  try {
+    const query = req.query.q;
+    const year = query.match(/\d+/g);
+
+    if (!query) {
+      return res.json([]);
+    }
+
+    const result = await searchAnything(query, year);
+    res.status(200).json(result);
+  } catch(error)  {
     next(error);
   }
 }

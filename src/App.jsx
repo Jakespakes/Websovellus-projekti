@@ -13,7 +13,6 @@ import Col from 'react-bootstrap/Col'
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchOption, setSearchOption] = useState('');
   const [showLogin, setShowLogin] = useState(false);
   const [showGroupCreation, setShowGroupCreation] = useState(false);
   const [groupSuccessMessage, setGroupSuccessMessage] = useState('');
@@ -59,8 +58,6 @@ function App() {
         <Navbar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          searchOption={searchOption}
-          setSearchOption={setSearchOption}
           onLoginClick={() => openLogin('login')}
           user={user}
           onLogout={handleLogout}
@@ -86,7 +83,6 @@ function App() {
       <Col xs={12} md={9} lg={10}>
         <Home
           searchQuery={searchQuery}
-          searchOption={searchOption}
         />
       </Col>
 

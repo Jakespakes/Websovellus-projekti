@@ -5,12 +5,11 @@ import Personcard from './personcard/Personcard.jsx'
 import "./Home.css"
 import Container from 'react-bootstrap/Container'
 
-export default function Home({ searchQuery, searchOption }) {
+export default function Home({ searchQuery }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchedMovies, setSearchedMovies] = useState([]);
-  const [searchedPeople, setSearchedPeople] = useState([]);
+  const [searchedAnything, setSearchedAnything] = useState([]);
   const [genres, setGenres] = useState([]);
 
   // useEffect for fetching genres through api
@@ -18,9 +17,9 @@ export default function Home({ searchQuery, searchOption }) {
     const fetchGenres = async () => {
       try {
         const response = await axios.get('/api/movies/genres');
-        setGenres(response.data)
+        setGenres(response.data);
       } catch (err) {
-        setError(err.message)
+        setError(err.message);
       }
     }
 
@@ -29,16 +28,16 @@ export default function Home({ searchQuery, searchOption }) {
 
   // async / useEffect for fetching popular movielist throuh api
   const fetchData = async () => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
 
     try {
-      const response = await axios.get('/api/movies/popular')
-      setData(response.data)
+      const response = await axios.get('/api/movies/popular');
+      setData(response.data);
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -46,58 +45,42 @@ export default function Home({ searchQuery, searchOption }) {
     fetchData()
   }, [])
 
+  const searchAnything = async () => {
+    if (searchQuery.trim().length < 3) {
+      setSearchedAnything([]);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await axios.get(`/api/movies/search?q=${searchQuery}`);
+      setSearchedAnything(response.data);
+    } catch(err) {
+      console.error(err);
+      setError("Haku epäonnistui");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // useEffect to get searchquery and updating the searched movie array
   // Timeout is for searching automatically without having the user to press enter
   // after input is typed the async function searches through api with the input
   useEffect(() => {
     const timeout = setTimeout(() => {
-      searchMovies()
+      searchAnything()
     }, 1000)
 
     return () => clearTimeout(timeout)
   }, [searchQuery])
 
-  const searchMovies = async () => {
-    if (searchQuery.trim().length < 3) {
-      setSearchedMovies([]);
-      return;
-    }
+  const movies = searchedAnything.filter(item => item.media_type === "movie");
+  const people = searchedAnything.filter(item => item.media_type === "person");
+  /* const series = searchedAnything.filter(item => item.media_type === "tv"); */
 
-    if (searchOption === "movie") {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await axios.get(`/api/movies/search/movie?q=${searchQuery}`);
-
-        setSearchedMovies(response.data);
-      } catch (err) {
-        console.error(err);
-        setError("Movie search failed");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    if (searchOption === "person") {
-      try {
-        setLoading(true);
-        setError("");
-
-        const response = await axios.get(`/api/movies/search/person?q=${searchQuery}`);
-
-        setSearchedPeople(response.data);
-        console.log(response.data);
-      } catch (err) {
-        console.error(err);
-        setError("People search failed");
-      } finally {
-        setLoading(false);
-      }
-    }
-  }
-
-  if (loading) return <main><h1>Downloading movies...</h1></main>
+  if (loading) return <main><h1>Ladataan tietoja...</h1></main>
 
   return (
     <Container fluid>
@@ -117,7 +100,14 @@ export default function Home({ searchQuery, searchOption }) {
 
       <div className="searched-person-list">
         <Personcard
-          data={searchedPeople}
+          data={people}
+        />
+      </div>
+      
+      <div className="searched-movies-list">
+        <Moviecard
+          data={movies}
+          genres={genres}
         />
       </div>
 

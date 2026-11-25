@@ -21,7 +21,7 @@ export default function Moviecard({ data, genres }) {
             setSelectedMovie(response.data);
             console.log(response.data);
         } catch (err) {
-            console.log("Could not fetch movie details")
+            console.log("Elokuvien hakeminen ei onnistunut")
         }
     }
 
@@ -81,7 +81,8 @@ export default function Moviecard({ data, genres }) {
             {selectedMovie && (
                 <Moviemodal
                     movie={selectedMovie}
-                    onClose={() => setSelectedMovie(null)} />
+                    onClose={() => setSelectedMovie(null)} 
+                />
             )}
         </>
     );
