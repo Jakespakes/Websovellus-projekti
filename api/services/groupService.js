@@ -11,7 +11,8 @@ import {
     processJoinRequest,
     getGroupMembersByGroupId,
     removeMember,
-    updateMemberRole
+    updateMemberRole,
+    transferOwnership
 } from '../models/groupModel.js'
 
 export async function createNewGroup(name, description, ownerId) {
@@ -153,7 +154,7 @@ export async function removeGroupMember(groupId, userIdToRemove, ownerId){
 
     // Estetään omistajan poisto ryhmästä
     if (Number(userIdToRemove) === group.owner_id){
-        const error = new Error('Ryhmän omistajaa ei voi poistaa ryhmästä');
+        const error = new Error('Ryhmän omistajaa ei voi poistaa ryhmästä. Siirrä ensin omistajuus toiselle jäsenelle');
         error.status = 409;
         throw error;
     }
@@ -189,4 +190,30 @@ export async function changeMemberRole(groupId, userId, role, ownerId){
     }
 
     return await updateMemberRole(groupId, userId, role);
+}
+
+export async function transferGroupOwnership(groupId, currentOwnerId, newOwnerId) {
+    const group = await getGroupById(groupId);
+
+    if (!group) {
+        const error = new Error('Ryhmää ei löytynyt');
+        error.status = 404;
+        throw error;
+    }
+
+    if (group.owner_id !== currentOwnerId) {
+        const error = new Error('Vain omistaja voi siirtää ryhmän omistajuuden toiselle');
+        error.status = 403;
+        throw error;
+    }
+
+    const member = await getGroupMember(groupId, newOwnerId);
+
+    if (!member) {
+        const error = new Error('Uuden omistajan täytyy olla ryhmän jäsen');
+        error.status = 400;
+        throw error;
+    }
+
+    await transferOwnership(groupId, currentOwnerId, newOwnerId);
 }
