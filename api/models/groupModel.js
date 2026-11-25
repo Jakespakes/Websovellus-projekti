@@ -139,6 +139,12 @@ export async function processJoinRequest (requestId, status){
     }
 }
 
+export async function getGroupMember(groupId, userId) {
+    const result = await pool.query("SELECT * FROM group_members WHERE group_id = $1 AND user_id = $2",
+    [groupId, userId]);
+    return result.rows[0];
+}
+
 export async function getGroupMembersByGroupId(groupId){
     const result = await pool.query("SELECT u.id, u.username, u.email, gm.role, gm.joined_at FROM group_members gm JOIN users u ON u.id = gm.user_id WHERE gm.group_id = $1 ORDER BY CASE WHEN gm.role = 'admin' THEN 1 ELSE 2 END, u.username", 
     [groupId]);
@@ -178,6 +184,29 @@ export async function updateMemberRole(groupId, userId, role){
         await client.query('COMMIT');
 
         return request;
+
+    } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+
+export async function transferOwnership(groupId, currentOwnerId, newOwnerId) {
+    const client = await pool.connect();
+
+    try {
+
+        await client.query('BEGIN');
+
+        await client.query("UPDATE groups SET owner_id = $1 WHERE id = $2 AND owner_id = $3",
+        [newOwnerId, groupId, currentOwnerId]);
+
+        await client.query("UPDATE group_members SET role = 'admin' WHERE group_id = $1 AND user_id = $2",
+        [groupId, newOwnerId]);
+
+        await client.query('COMMIT');
 
     } catch (error) {
         await client.query('ROLLBACK');

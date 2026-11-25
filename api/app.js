@@ -10,6 +10,7 @@ import movieRouter from './routes/movieRouter.js'
 import authRouter from './routes/authRouter.js'
 import groupRouter from './routes/groupRouter.js'
 import reviewRouter from './routes/reviewRouter.js'
+import movieListRouter from './routes/movieListRouter.js'
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use('/api/movies', movieRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/groups', groupRouter)
 app.use('/api/review', reviewRouter)
+app.use('/api/lists', movieListRouter)
 
 // Health check endpoint for database connectivity
 app.get('/api/health', async (req, res) => {

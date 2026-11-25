@@ -10,8 +10,10 @@ import {
     updateJoinRequest,
     getMembers,
     deleteMember,
-    updateMemberRole
+    updateMemberRole,
+    transferOwner
 } from '../controllers/GroupController.js';
+import { createGroupMovieList, getGroupMovieLists } from '../controllers/MovieListController.js';
 import requireAuth from '../middleware/requireAuth.js';
 
 const router = express.Router();
@@ -28,6 +30,8 @@ router.patch('/:id/join-requests/:requestId', requireAuth, updateJoinRequest);
 router.get('/:id/members', requireAuth, getMembers);
 router.delete('/:id/members/:userId', requireAuth, deleteMember);
 router.patch('/:id/members/:userId', requireAuth, updateMemberRole);
-// router.patch(/:id/owner) Mahdollinen route omistajuuden eli hallintaoikeuden siirtoon
+router.patch('/:id/owner', requireAuth, transferOwner);
+router.post('/:id/lists',requireAuth, createGroupMovieList);
+router.get('/:id/lists', requireAuth,getGroupMovieLists);
 
 export default router;
