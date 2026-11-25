@@ -93,7 +93,7 @@ export default function Home({ searchQuery }) {
 
       <div className="searched-movies-list">
         <Moviecard
-          data={searchedMovies}
+          data={searchedAnything}
           genres={genres}
         />
       </div>
