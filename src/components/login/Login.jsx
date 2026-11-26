@@ -104,12 +104,12 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                     &times;
                 </button>
                 
-                <h2>{ isRegistering ? 'Create Account' : 'Login' }</h2>
+                <h2>{ isRegistering ? 'Luo käyttäjä' : 'Kirjaudu sisään' }</h2>
 
                 <form onSubmit={handleSubmit}>
                      {isRegistering && (
                         <div className="form-group">
-                            <label htmlFor="username">Username</label>
+                            <label htmlFor="username">Käyttäjänimi</label>
                             <input
                                 type="text"
                                 id="username"
@@ -122,7 +122,7 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                     )}
 
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Sähköposti</label>
                         <input
                             type="email"
                             id="email"
@@ -134,7 +134,7 @@ function Login({ onClose, onLogin, initialMode = 'login' }) {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Salasana</label>
                         <input
                             type="password"
                             id="password"

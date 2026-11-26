@@ -28,9 +28,10 @@ export default function NavBar({
     >
       <Container>
 
-        <BsNavbar.Brand href="/">
-          Movie Database
-        </BsNavbar.Brand>
+
+        <a className="navbar-brand" href="/">
+          <img src="/leffapuntari_logo.png" alt="Home-button"/>
+        </a>
 
         <BsNavbar.Toggle aria-controls="navbar-content" />
 
@@ -43,32 +44,11 @@ export default function NavBar({
 
             <input
               className="form-control"
-              placeholder="Search for a movie"
+              placeholder="Etsi mitä vain"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-
-            <label className="text-white">
-              <input
-                type="radio"
-                value="movie"
-                checked={searchOption === "movie"}
-                onChange={(e) => setSearchOption(e.target.value)}
-              />
-              {" "}Movie
-            </label>
-
-            <label className="text-white">
-              <input
-                type="radio"
-                value="person"
-                checked={searchOption === "person"}
-                onChange={(e) => setSearchOption(e.target.value)}
-              />
-              {" "}Person
-            </label>
-
           </form>
 
           <Nav className="ms-auto">
@@ -77,7 +57,7 @@ export default function NavBar({
               <div className="d-flex align-items-center gap-2">
 
                 <span className="text-white">
-                  Welcome, {user.username}
+                  Tervetuloa, {user.username}
                 </span>
 
                 <Button
