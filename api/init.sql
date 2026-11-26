@@ -1,4 +1,4 @@
--- ==========================================
+-- ===========================================
 -- Movie Community Application Database Schema
 -- PostgreSQL
 -- ==========================================
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS group_members (
     PRIMARY KEY (group_id, user_id),
 
     CONSTRAINT chk_group_member_role
-        CHECK (role IN ('owner', 'moderator', 'member'))
+        CHECK (role IN ('admin', 'member'))
 );
 
 -- ==========================================
