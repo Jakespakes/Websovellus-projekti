@@ -1,89 +1,42 @@
 .SideBar {
   position: fixed;
-  top: 5rem;
-  left: 0;
-
-  width: 2.8rem;
+  width: 10rem;
   height: calc(100vh - 70px);
-
+  left: 0;
+  top: 5rem;
   background-color: #140527;
 
   transition: width 0.3s ease;
   overflow: hidden;
 }
 
+
+/*The sidebar card (has the buttons in it)*/
+.sidebar-card {
+  margin: 1rem;
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.2s ease;
+} 
+/*Mobile sidebar*/
+.mobile-SideBar.offcanvas {
+  --bs-offcanvas-width: 55vw;
+  background-color: #140527;
+}
+/*Hover settings*/
 .SideBar:hover {
-  width: 9.3rem;
+  width: 15rem;
   background-color: #23094c;
+
 }
 
 .SideBar:not(:hover) {
-  width: 4.3rem;
-  overflow: hidden;
+  width: 10rem;
 }
 
-.SideBar:hover .guestPanel {
+.SideBar:hover .sidebar-card {
   opacity: 1;
   pointer-events: auto;
-}
-
-.guestPanel {
-  margin: 1rem;
-  padding: 1rem;
-
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  background-color: #23094c;
-
-  border-radius: 0.6rem;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-
-.guestPanel h3 {
-  margin: 0;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  color: #fff;
-}
-
-.loginButton,
-.registerButton {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.registerButton {
-  background-color: #201abf;
-  color: white;
-}
-
-.groupList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1rem;
-    color: white;
-}
-
-.groupList h4 {
-    margin: 0;
-}
-
-.groupCard {
-    padding: 0.6rem;
-    background-color: #35116b;
-    border-radius: 5px;
-    overflow-wrap: break-word;
 }

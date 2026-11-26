@@ -1,13 +1,19 @@
- import { useEffect, useState } from "react";
- import axios from "axios";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./SideBar.css";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
+import Offcanvas from "react-bootstrap/Offcanvas";
 
 export default function SideBar({
     onLoginClick,
     onRegisterClick,
     onCreateGroupClick,
     user,
-    refreshTrigger
+    refreshTrigger,
+    isOpen,
+    onClose
 }) {
 
     const [groups, setGroups] = useState([]);
@@ -24,59 +30,195 @@ export default function SideBar({
             // Clear groups when the user logs out
             setGroups([]);
         }
-        }, [user, refreshTrigger]);
+    }, [user, refreshTrigger]);
 
-        async function fetchGroups() {
-            try {
-                const response = await axios.get("/api/groups/my-groups", {
-                    withCredentials: true
-                });
-                setGroups(response.data);
-            } catch (error) {
-                console.error("Ryhmien haku epäonnistui:", error);
-            }
+    async function fetchGroups() {
+        try {
+            const response = await axios.get("/api/groups/my-groups", {
+                withCredentials: true
+            });
+            setGroups(response.data);
+        } catch (error) {
+            console.error("Ryhmien haku epäonnistui:", error);
         }
+    }
 
     return (
-        <aside className="SideBar">
+        <>
+            {/* Desktop sidebar */}
 
-            {!user ? (
-                <div className="guestPanel">
-                    <h3>Testi</h3>
-                    <p/>
-    
-                    <button className="login-button"
-                        onClick={onLoginClick}>
-                        Kirjaudu sisään
-                    </button>
-                    <button className="registerButton"
-                        onClick={onRegisterClick}>
-                        Rekisteröidy
-                    </button>
-                </div>
+            <aside className="SideBar d-none d-md-block">
+
+                {!user ? (
+
+                    <Card className="sidebar-card">
+
+                        <Card.Body>
+
+                            <Card.Title>
+                                Tervetuloa
+                            </Card.Title>
+
+                            <Button
+                                variant="primary"
+                                className="w-100 mb-2"
+                                onClick={onLoginClick}
+                            >
+                                Kirjaudu sisään
+                            </Button>
+
+                            <Button
+                                variant="secondary"
+                                className="w-100"
+                                onClick={onRegisterClick}
+                            >
+                                Rekisteröidy
+                            </Button>
+
+                        </Card.Body>
+
+                    </Card>
+
                 ) : (
-                    <div className="userPanel">
-                        <h3>Tervetuloa, {user.username}!</h3>
-                        <p>Olet kirjautuneenä sisään.</p>
-                        <button
-                            className="CreateGroupButton"
-                            onClick={onCreateGroupClick}
-                        >
-                            Luo ryhmä
-                        </button>
-                        <div className="groupList">
-                            <h4>Omat ryhmät</h4>
+
+                    <Card className="sidebar-card">
+
+                        <Card.Body>
+
+                            <Card.Title>
+                                Tervetuloa, {user.username}
+                            </Card.Title>
+
+                            <Button
+                                variant="success"
+                                className="w-100"
+                                onClick={onCreateGroupClick}
+                            >
+                                Luo ryhmä
+                            </Button>
+
+                        </Card.Body>
+
+                        <ListGroup variant="flush">
+
+                            <ListGroup.Item>
+                                <strong>Omat ryhmät</strong>
+                            </ListGroup.Item>
+
                             {groups.length > 0 ? (
                                 groups.map((group) => (
-                                <div className="groupCard" key={group.id}>
-                                    {group.name}
-                                </div>
+                                    <ListGroup.Item key={group.id}>
+                                        {group.name}
+                                    </ListGroup.Item>
                                 ))
                             ) : (
-                            <p>Et kuulu vielä yhteenkään ryhmään.</p>)}
-                            </div>
-                        </div>
-                        )}
+                                <ListGroup.Item>
+                                    Et kuulu vielä yhteenkään ryhmään.
+                                </ListGroup.Item>
+                            )}
+
+                        </ListGroup>
+
+                    </Card>
+
+                )}
+
             </aside>
-        );
+
+            {/* Mobile sidebar */}
+
+            <Offcanvas
+                show={isOpen}
+                onHide={onClose}
+                placement="start"
+                className="mobile-SideBar"
+            >
+
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>
+                        Valikko
+                    </Offcanvas.Title>
+                </Offcanvas.Header>
+
+                <Offcanvas.Body>
+
+                    {!user ? (
+
+                        <Card className="sidebar-card">
+
+                            <Card.Body>
+
+                                <Card.Title>
+                                    Tervetuloa
+                                </Card.Title>
+
+                                <Button
+                                    variant="primary"
+                                    className="w-100 mb-2"
+                                    onClick={onLoginClick}
+                                >
+                                    Kirjaudu sisään
+                                </Button>
+
+                                <Button
+                                    variant="secondary"
+                                    className="w-100"
+                                    onClick={onRegisterClick}
+                                >
+                                    Rekisteröidy
+                                </Button>
+
+                            </Card.Body>
+
+                        </Card>
+
+                    ) : (
+
+                        <Card className="sidebar-card">
+
+                            <Card.Body>
+
+                                <Card.Title>
+                                    Tervetuloa, {user.username}
+                                </Card.Title>
+
+                                <Button
+                                    variant="success"
+                                    className="w-100"
+                                    onClick={onCreateGroupClick}
+                                >
+                                    Luo ryhmä
+                                </Button>
+
+                            </Card.Body>
+
+                            <ListGroup variant="flush">
+
+                                <ListGroup.Item>
+                                    <strong>Omat ryhmät</strong>
+                                </ListGroup.Item>
+
+                                {groups.length > 0 ? (
+                                    groups.map((group) => (
+                                        <ListGroup.Item key={group.id}>
+                                            {group.name}
+                                        </ListGroup.Item>
+                                    ))
+                                ) : (
+                                    <ListGroup.Item>
+                                        Et kuulu vielä yhteenkään ryhmään.
+                                    </ListGroup.Item>
+                                )}
+
+                            </ListGroup>
+
+                        </Card>
+
+                    )}
+
+                </Offcanvas.Body>
+
+            </Offcanvas>
+        </>
+    );
 }

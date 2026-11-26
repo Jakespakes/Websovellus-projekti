@@ -4,8 +4,8 @@
   margin: 0;
   padding: 0;
 }
-
-.layout {
+/*Used to change how main part of the window works, sets limits to where header, footer and sidebar are */
+/*.layout {
   display: grid;
 
   grid-template-areas:
@@ -14,11 +14,11 @@
     "footer footer";
   min-height: 100vh;
   grid-template-columns: 280px 1fr;
-}
+}*/
 
 
-
-.content {
+/*Changes main grid that contains moviecarousels*/
+/*.content {
   grid-area: main;
 
   padding-top: 5.6rem;
@@ -28,7 +28,8 @@
 .sidebar{
   position: fixed;
   top: 5rem;
-}
+}*/
+
 header {
   position: sticky;
 }

@@ -1,48 +1,107 @@
-import "./NavBar.css"
+import "./NavBar.css";
 
-export default function NavBar({ searchQuery, setSearchQuery, onLoginClick, user, onLogout }) {
+import BsNavbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
+
+export default function NavBar({
+  searchQuery,
+  setSearchQuery,
+  onLoginClick,
+  searchOption,
+  setSearchOption,
+  user,
+  onLogout
+}) {
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
-    <nav className="navbar">
-      <div className="container">
-        <a className="navbar-brand" href="/">
-          <img src="/leffapuntari_logo.png" alt="Home button"/>
-        </a>
+    <BsNavbar
+      variant="dark"
+      expand="lg"
+      fixed="top"
+      className="movie-NavBar"
+    >
+      <Container>
 
-        <form className="search-form" onSubmit={handleSubmit}>
-          <input
-            id="movie-search"
-            placeholder="Etsi elokuvia"
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            className="search-input-field"
-          />
-        </form>
+        <BsNavbar.Brand href="/">
+          Movie Database
+        </BsNavbar.Brand>
 
-        {user ? (
-          <div className="user-section">
-            <span>Tervetuloa, {user.username} </span>
+        <BsNavbar.Toggle aria-controls="navbar-content" />
 
-            <button
-              className="login-button"
-              onClick={onLogout}
-            >
-              Kirjaudu ulos
-            </button>
-          </div>
-        ) : (
-          <button
-            className="login-button"
-            onClick={onLoginClick}
+        <div className="d-flex align-items-center gap-3 flex-wrap w-100">
+
+          <form
+            className="d-flex gap-2 align-items-center flex-wrap"
+            onSubmit={handleSubmit}
           >
-           Kirjaudu sisään
-          </button>
-        )}
-      </div>
-    </nav >
+
+            <input
+              className="form-control"
+              placeholder="Search for a movie"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+
+            <label className="text-white">
+              <input
+                type="radio"
+                value="movie"
+                checked={searchOption === "movie"}
+                onChange={(e) => setSearchOption(e.target.value)}
+              />
+              {" "}Movie
+            </label>
+
+            <label className="text-white">
+              <input
+                type="radio"
+                value="person"
+                checked={searchOption === "person"}
+                onChange={(e) => setSearchOption(e.target.value)}
+              />
+              {" "}Person
+            </label>
+
+          </form>
+
+          <Nav className="ms-auto">
+
+            {user ? (
+              <div className="d-flex align-items-center gap-2">
+
+                <span className="text-white">
+                  Welcome, {user.username}
+                </span>
+
+                <Button
+                  variant="outline-light"
+                  onClick={onLogout}
+                >
+                  Kirjaudu ulos
+                </Button>
+
+              </div>
+            ) : (
+              <Button
+                variant="outline-light"
+                onClick={onLoginClick}
+              >
+                Kirjaudu sisään
+              </Button>
+            )}
+
+          </Nav>
+
+        </div>
+      
+      </Container>
+    </BsNavbar>
   );
 }
