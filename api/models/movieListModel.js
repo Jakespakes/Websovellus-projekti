@@ -18,6 +18,14 @@ export async function getMovieListsByUserId(userId) {
     return result.rows;
 }
 
+export async function getMovieListsByMemberUserId(userId) {
+    const result = await pool.query("SELECT DISTINCT ml.* FROM movie_lists ml JOIN group_members gm ON gm.group_id = ml.group_id WHERE gm.user_id = $1 ORDER BY ml.created_at DESC",
+    [userId]
+    );
+
+    return result.rows;
+}
+
 export async function getMovieListsByGroupId(groupId) {
     const result = await pool.query("SELECT * FROM movie_lists WHERE group_id = $1 ORDER BY created_at DESC",
     [groupId]);

@@ -1,6 +1,7 @@
 import express from 'express';
 import { 
-    createPersonalMovieList, 
+    createPersonalMovieList,
+    getAllUserMovieLists, 
     getMovieList, 
     getMoviesFromMovieList, 
     addMovieToList,
@@ -12,6 +13,7 @@ import requireAuth from '../middleware/requireAuth.js';
 const router = express.Router();
 
 router.post('/', requireAuth, createPersonalMovieList);
+router.get('/', requireAuth, getAllUserMovieLists);
 router.post('/:id/movies', requireAuth, addMovieToList);
 router.get('/:id', requireAuth, getMovieList);
 router.get('/:id/movies', requireAuth, getMoviesFromMovieList);

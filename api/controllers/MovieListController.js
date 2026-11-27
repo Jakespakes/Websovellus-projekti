@@ -1,5 +1,6 @@
 import { 
     getListByListId,
+    getUserLists,
     getGroupLists,
     getListMovies, 
     createPersonalList, 
@@ -14,6 +15,16 @@ export async function getMovieList(req, res,next) {
     try {
         const list = await getListByListId(req.params.id, req.user.id);
         res.json(list);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function getAllUserMovieLists(req, res, next) {
+
+    try {
+        const lists = await getUserLists(req.user.id);
+        res.status(200).json(lists);
     } catch (error) {
         next(error);
     }
