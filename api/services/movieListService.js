@@ -2,6 +2,7 @@ import {
     createMovieList,
     getMovieListByListId,
     getMovieListsByUserId,
+    getMovieListsByMemberUserId,
     getMovieListsByGroupId,
     getMovieListItems,
     addMovieToList,
@@ -48,6 +49,15 @@ export async function getListByListId(listId, userId) {
 
     return list;
 }
+
+export async function getUserLists(userId) {
+    const personalLists = await getMovieListsByUserId(userId);
+    const groupLists = await getMovieListsByMemberUserId(userId);
+
+    return {personalLists,groupLists};
+}
+
+
 
 export async function getGroupLists(groupId,userId) {
 
