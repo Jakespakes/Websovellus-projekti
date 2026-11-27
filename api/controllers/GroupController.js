@@ -9,7 +9,8 @@ import {
     handleJoinRequest,
     getGroupMembers,
     removeGroupMember,
-    changeMemberRole
+    changeMemberRole,
+    getGroupById
 } from '../services/groupService.js'
 
 export async function createGroup(req, res, next) {
@@ -111,6 +112,15 @@ export async function updateMemberRole(req, res, next){
     try {
         const member = await changeMemberRole(req.params.id, req.params.userId, req.body.role, req.user.id);
         res.json({message: 'Rooli päivitetty', member});
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function getGroup(req, res, next) {
+    try {
+        const group = await getGroupById(req.params.id);
+        res.json(group);
     } catch (error) {
         next(error);
     }

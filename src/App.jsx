@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Home from './components/home/Home'
 import Navbar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
 import Footer from './components/home/Footer/Footer'
 import Login from "./components/login/Login"
 import GroupCreation from './group/GroupCreation'
-
+import GroupSite from './group/GroupSite'
+import './App.css'
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showLogin, setShowLogin] = useState(false);
@@ -69,10 +71,23 @@ function App() {
         />
       </aside>
 
-      <main>
-        <Home
-          searchQuery={searchQuery}
-        />
+      <main className="content">
+        <Routes>
+          {/* Homepage */}
+          <Route
+            path="/"
+            element={
+              <Home
+                searchQuery={searchQuery}
+              />
+            }
+          />
+          {/* Reusable route for groups */}
+          <Route
+            path="/groups/:groupID"
+            element={<GroupSite />}
+          />
+        </Routes>
       </main>
 
       {groupSuccessMessage && (

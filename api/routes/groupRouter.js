@@ -10,7 +10,8 @@ import {
     updateJoinRequest,
     getMembers,
     deleteMember,
-    updateMemberRole
+    updateMemberRole,
+    getGroup
 } from '../controllers/GroupController.js';
 import requireAuth from '../middleware/requireAuth.js';
 
@@ -28,6 +29,7 @@ router.patch('/:id/join-requests/:requestId', requireAuth, updateJoinRequest);
 router.get('/:id/members', requireAuth, getMembers);
 router.delete('/:id/members/:userId', requireAuth, deleteMember);
 router.patch('/:id/members/:userId', requireAuth, updateMemberRole);
+router.get('/:id', requireAuth, getGroup);
 // router.patch(/:id/owner) Mahdollinen route omistajuuden eli hallintaoikeuden siirtoon
 
 export default router;
