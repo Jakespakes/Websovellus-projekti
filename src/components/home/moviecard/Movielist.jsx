@@ -121,6 +121,7 @@ export default function Movielist({ movieId }) {
                             </option>
                         ))}
                     </select>
+                    <br></br>
                     <button type='submit'>
                         Lisää
                     </button>
