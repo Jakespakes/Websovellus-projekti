@@ -12,7 +12,8 @@ import {
     getGroupMembersByGroupId,
     removeMember,
     updateMemberRole,
-    transferOwnership
+    transferOwnership,
+    getGroupMember
 } from '../models/groupModel.js'
 
 export async function createNewGroup(name, description, ownerId) {
@@ -190,6 +191,24 @@ export async function changeMemberRole(groupId, userId, role, ownerId){
     }
 
     return await updateMemberRole(groupId, userId, role);
+}
+
+export async function getGroupById(groupId) {
+    if (!groupId) {
+        const error = new Error('Ryhmän tunnus on pakollinen');
+        error.status = 400;
+        throw error;
+    }
+
+    const group = await getGroupByGroupId(groupId);
+
+    if (!group) {
+        const error = new Error('Ryhmää ei löytynyt');
+        error.status = 404;
+        throw error;
+    }
+
+    return group;
 }
 
 export async function transferGroupOwnership(groupId, currentOwnerId, newOwnerId) {

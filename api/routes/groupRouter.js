@@ -11,6 +11,7 @@ import {
     getMembers,
     deleteMember,
     updateMemberRole,
+    getGroup,
     transferOwner
 } from '../controllers/GroupController.js';
 import { createGroupMovieList, getGroupMovieLists } from '../controllers/MovieListController.js';
@@ -27,6 +28,7 @@ router.get('/my-groups', requireAuth, getUserGroups);
 router.get('/owned-groups', requireAuth, getOwnedGroups);
 router.patch('/:id', requireAuth, updateGroup);
 router.delete('/:id', requireAuth, deleteGroup);
+router.get('/:id', requireAuth, getGroup);
 
 // Liittymispyynnöt ryhmiin
 router.post('/:id/join-request', requireAuth, createJoinRequest);
@@ -37,6 +39,8 @@ router.patch('/:id/join-requests/:requestId', requireAuth, updateJoinRequest);
 router.get('/:id/members', requireAuth, getMembers);
 router.delete('/:id/members/:userId', requireAuth, deleteMember);
 router.patch('/:id/members/:userId', requireAuth, updateMemberRole);
+
+// router.patch(/:id/owner) Mahdollinen route omistajuuden eli hallintaoikeuden siirtoon
 router.patch('/:id/owner', requireAuth, transferOwner);
 
 // Ryhmän elokuvalistat

@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Home from './components/home/Home'
 import Navbar from './components/navbar/NavBar'
 import SideBar from './components/sidebar/SideBar'
 import Footer from './components/Footer/Footer'
 import Login from "./components/login/Login"
 import GroupCreation from './group/GroupCreation'
+import GroupSite from './group/GroupSite'
+import './App.css'
 import MobileFooter from './Mobilefooter/MobileFooter'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
@@ -80,6 +83,24 @@ function App() {
         />
       </Col>
 
+      <main className="content">
+        <Routes>
+          {/* Homepage */}
+          <Route
+            path="/"
+            element={
+              <Home
+                searchQuery={searchQuery}
+              />
+            }
+          />
+          {/* Reusable route for groups */}
+          <Route
+            path="/groups/:groupID"
+            element={<GroupSite />}
+          />
+        </Routes>
+      </main>
       <Col xs={12} md={9} lg={10}>
         <Home
           searchQuery={searchQuery}
