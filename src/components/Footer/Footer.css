@@ -4,6 +4,7 @@
     margin-left: calc(50% - 50vw);
     background-color: #230174 !important;
 
+    margin-top: auto;
     display: flex;
     justify-content: center;
     align-items: center;

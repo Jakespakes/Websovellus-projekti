@@ -83,7 +83,7 @@ export default function Home({ searchQuery }) {
   if (loading) return <main><h1>Ladataan tietoja...</h1></main>
 
   return (
-    <Container fluid>
+    <div>
 
       {error ? (
         <p className="message error" role="alert">
@@ -114,6 +114,6 @@ export default function Home({ searchQuery }) {
         
       </div>
 
-    </Container>
+    </div>
   )
 }

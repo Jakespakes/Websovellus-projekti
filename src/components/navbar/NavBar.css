@@ -1,14 +1,23 @@
 .BsNavbar {
   background-color: #140527 !important;
   position: fixed;
+
 }
- .movie-NavBar {
+
+.movie-NavBar {
   background-color: #140527 !important;
   background-image: none !important;
+  height: 85px;
 }
 
 .movie-NavBar .container {
-    background: transparent !important;
+  background: transparent !important;
+  padding-left: 0;
+
+}
+
+.movie-NavBar .navbar-brand {
+  padding-left: 2.5rem;
 }
 
 
@@ -18,16 +27,53 @@
 }
 
 .login-button {
-    padding: 12px ;
-    
-    background-color: #323030;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight:lighter;
+  padding: 12px;
+
+  background-color: #323030;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: lighter;
 }
 
 .login-button:hover {
-    background-color: #555;
+  background-color: #555;
+}
+
+.search-Form {
+  flex-grow: 1;
+  max-width: 50rem;
+  min-width: 20rem;
+}
+
+@media (max-width: 768px) {
+
+  .search-Form {
+    width: 50%;
+    flex-wrap: wrap;
+  }
+
+  .search-Form input {
+    width: 50%;
+    max-width: 100%;
+  }
+
+  .navbar .d-flex {
+    flex-wrap: wrap;
+  }
+    .movie-card {
+        width: calc(100vw - 2rem);
+        max-width: none;
+    }
+
+    .movie-card img {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+.form-control {
+  width: 75%;
 }

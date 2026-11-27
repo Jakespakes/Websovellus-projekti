@@ -66,8 +66,8 @@ function App() {
     </Row>
 
     <Row>
-
-      <Col xs={12} md={3} lg={2}>
+      
+      <Col>
         <SideBar
           onLoginClick={() => openLogin('login')}
           onRegisterClick={() => openLogin('register')}
@@ -78,9 +78,9 @@ function App() {
           isOpen={mobileSidebarOpen}
           onClose={() => setMobileSidebarOpen(false)}
         />
-      </Col>
+      </Col> 
 
-      <Col xs={12} md={9} lg={10}>
+      <Col xs={12} md={10} lg={10}>
         <Home
           searchQuery={searchQuery}
         />

@@ -26,19 +26,20 @@ export default function NavBar({
       fixed="top"
       className="movie-NavBar"
     >
+      <a className="navbar-brand" href="/">
+        <img src="/leffapuntari_logo.png" alt="Home-button" />
+      </a>
       <Container>
 
 
-        <a className="navbar-brand" href="/">
-          <img src="/leffapuntari_logo.png" alt="Home-button"/>
-        </a>
+
 
         <BsNavbar.Toggle aria-controls="navbar-content" />
 
         <div className="d-flex align-items-center gap-3 flex-wrap w-100">
 
           <form
-            className="d-flex gap-2 align-items-center flex-wrap"
+            className="d-flex gap-2 align-items-center flex-wrap flex-grow-1"
             onSubmit={handleSubmit}
           >
 
@@ -80,7 +81,7 @@ export default function NavBar({
           </Nav>
 
         </div>
-      
+
       </Container>
     </BsNavbar>
   );
