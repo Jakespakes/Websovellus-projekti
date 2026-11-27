@@ -50,18 +50,16 @@ export default function Moviemodal({ movie, onClose }) {
                 <div>
                     <p>{movie.result.result.overview}</p>
                 </div>
-                <div>
+                <div className="moviemodal-bottom">
                     <Moviereview 
                         movie_id={movie.result.result.id} 
                         onSubmit={(reviewData) => {console.log(reviewData)}} 
                     />
-                </div>
-                {/* TODO: Make a list of actors and of the cast that the user can scroll through with arrows! */}
-                {/* Flexboxes would also be nice!*/}
-                {/* Additionally, CSS styling for this, since at the moment this is atrocious. But it's the first vers of this feature. */}
-                <Movielist 
 
-                />
+                    <Movielist 
+                        movieId={movie.result.result.id}    
+                    />
+                </div>
             </div>
         </div>
     )

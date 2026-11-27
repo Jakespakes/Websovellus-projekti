@@ -91,16 +91,16 @@ export default function Home({ searchQuery }) {
         </p>
       ) : null}
 
+      <div className="searched-person-list">
+        <Personcard
+          data={people}
+        />
+      </div>
+
       <div className="searched-movies-list">
         <Moviecard
           data={movies}
           genres={genres}
-        />
-      </div>
-
-      <div className="searched-person-list">
-        <Personcard
-          data={people}
         />
       </div>
 
