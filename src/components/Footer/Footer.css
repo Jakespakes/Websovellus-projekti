@@ -1,13 +1,22 @@
-.Footer {
-    width: 100%;
-    height: 40px;
-
-    background-color: #213242;
-
-    margin-top: 20px;
+.BS-Footer {
+    width: 100vw;
+    min-height: 5rem;
+    margin-left: calc(50% - 50vw);
+    background-color: #230174 !important;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.movie-footer {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.movie-footer .container {
+    background: transparent !important;
+}

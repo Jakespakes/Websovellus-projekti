@@ -19,6 +19,7 @@
     "argon2": "^0.45.2",
     "axios": "^1.12.2",
     "bcrypt": "^6.0.0",
+    "bootstrap": "^5.3.9",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
@@ -26,6 +27,7 @@
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.23.0",
     "react": "^19.1.1",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.18.7"
   },

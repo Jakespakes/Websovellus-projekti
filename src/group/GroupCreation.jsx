@@ -30,7 +30,7 @@ function GroupCreation({ onClose, onSuccess }) {
         // Basic frontend validation.
         // The backend also performs its own validation.
         if (trimmedName.length < 3) {
-            setMessage('Group name must be at least 3 characters long.');
+            setMessage('Ryhmän nimi pitää olla vähintään 3 kirjainta pitkä.');
             setMessageType('error');
             return;
         }
@@ -69,7 +69,7 @@ function GroupCreation({ onClose, onSuccess }) {
                 throw new Error(
                     data.message ||
                     data.error ||
-                    'Failed to create group.'
+                    'Ryhmän tekeminen epäonnistui.'
                 );
             }
 
@@ -88,7 +88,7 @@ function GroupCreation({ onClose, onSuccess }) {
             // Display any errors returned by the backend or fetch.
             console.error('Group creation error:', error);
 
-            setMessage(error.message || 'Something went wrong.');
+            setMessage(error.message);
             setMessageType('error');
 
         } finally {
@@ -110,15 +110,14 @@ function GroupCreation({ onClose, onSuccess }) {
                     &times;
                 </button>
                 <div className="group-creation-header">
-                    <h1>Create a Group</h1>
-                    <p>Create a community for movie enthusiasts!</p>
+                    <h1>Luo ryhmä</h1>
                 </div>
 
                 {/* Connect the form submission to handleSubmit. */}
                 <form onSubmit={handleSubmit}>
 
                     <div className="form-group">
-                        <label htmlFor="groupName">Group Name</label>
+                        <label htmlFor="groupName">Ryhmän nimi</label>
 
                         <input
                             id="groupName"
@@ -132,11 +131,11 @@ function GroupCreation({ onClose, onSuccess }) {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="description">Kuvaus</label>
 
                         <textarea
                             id="description"
-                            placeholder="Kuvaus ryhmästä"
+                            placeholder="Ryhmän kuvaus"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             rows="4"
@@ -163,7 +162,7 @@ function GroupCreation({ onClose, onSuccess }) {
                         className="create-group-button"
                         disabled={loading}
                     >
-                        {loading ? 'Creating group...' : 'Create Group'}
+                        {loading ? 'Luodaan ryhmää...' : 'Luo ryhmä'}
                     </button>
 
                 </form>

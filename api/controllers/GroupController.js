@@ -10,7 +10,8 @@ import {
     getGroupMembers,
     removeGroupMember,
     changeMemberRole,
-    getGroupById
+    getGroupById,
+    transferGroupOwnership
 } from '../services/groupService.js'
 
 export async function createGroup(req, res, next) {
@@ -121,6 +122,15 @@ export async function getGroup(req, res, next) {
     try {
         const group = await getGroupById(req.params.id);
         res.json(group);
+        } catch (error) {
+        next(error);
+    }
+}
+
+export async function transferOwner(req, res, next) {
+    try {
+        await transferGroupOwnership(req.params.id, req.user.id, req.body.newOwnerId);
+        res.json({message: 'Omistajuus siirretty'});
     } catch (error) {
         next(error);
     }
