@@ -10,6 +10,7 @@ import {
     getGroupMembers,
     removeGroupMember,
     changeMemberRole,
+    getGroupById,
     transferGroupOwnership
 } from '../services/groupService.js'
 
@@ -113,6 +114,15 @@ export async function updateMemberRole(req, res, next){
         const member = await changeMemberRole(req.params.id, req.params.userId, req.body.role, req.user.id);
         res.json({message: 'Rooli päivitetty', member});
     } catch (error) {
+        next(error);
+    }
+}
+
+export async function getGroup(req, res, next) {
+    try {
+        const group = await getGroupById(req.params.id);
+        res.json(group);
+        } catch (error) {
         next(error);
     }
 }
