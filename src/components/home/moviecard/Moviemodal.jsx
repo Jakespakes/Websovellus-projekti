@@ -1,5 +1,5 @@
 import "./Moviemodal.css"
-import Moviereview from "./Moviereview"
+import Moviereview from "./Moviereview.jsx"
 import Movielist from "./Movielist.jsx"
 
 
