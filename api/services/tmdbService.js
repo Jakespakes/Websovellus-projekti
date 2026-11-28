@@ -20,7 +20,7 @@ export const getPopularMovies = async () => {
 
 export const searchMovies = async (query) => {
     const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&query=${query}`, 
+        `https://api.themoviedb.org/3/movie/${query}`, 
         {headers});
     
     if (!response.ok) {
@@ -29,8 +29,7 @@ export const searchMovies = async (query) => {
         throw error;
     }
 
-    const result = await response.json();
-    return result.results;
+    return response.json();
  }
 
  export const searchPerson = async (query) => {

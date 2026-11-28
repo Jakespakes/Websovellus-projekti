@@ -4,7 +4,7 @@ import { fetchPopularMovies, fetchSearchMovies, fetchMovieGenres, fetchMovieCred
 const router = Router()
 
 router.get('/popular', fetchPopularMovies)
-router.get('/search/movie', fetchSearchMovies)
+router.get('/id/:id', fetchSearchMovies)
 router.get('/search/person', fetchSearchPerson)
 router.get('/search', fetchAnything)
 router.get('/genres', fetchMovieGenres)

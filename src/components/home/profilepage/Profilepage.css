@@ -18,6 +18,27 @@
     padding-bottom: 2rem;
 }
 
+.movie-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+
+    img {
+        flex: 0 0 6rem;
+        width: 6rem;
+        height: 9rem;
+        border-radius: 1rem;
+        border: 2px solid black;
+        object-fit: cover;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
 .list-item {
     flex: 1 1 18rem;
     padding: 1rem;

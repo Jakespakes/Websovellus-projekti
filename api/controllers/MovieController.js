@@ -11,13 +11,7 @@ export const fetchPopularMovies = async (req, res, next) => {
 
 export const fetchSearchMovies = async (req, res, next) => {
   try {
-    const query = req.query.q;
-
-    if (!query) {
-      return res.json([]);
-    }
-
-    const result = await searchMovies(query);
+    const result = await searchMovies(req.params.id);
     res.status(200).json(result);
   } catch (error) {
     next(error);
