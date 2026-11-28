@@ -4,13 +4,15 @@ import Moviecard from './moviecard/Moviecard.jsx'
 import Personcard from './personcard/Personcard.jsx'
 import "./Home.css"
 import Container from 'react-bootstrap/Container'
+import Profilepage from './profilepage/Profilepage.jsx'
 
-export default function Home({ searchQuery }) {
+export default function Home({ searchQuery, user, showProfile }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchedAnything, setSearchedAnything] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [showMovies, setShowMovies] = useState(false);
 
   // useEffect for fetching genres through api
   useEffect(() => {
@@ -34,6 +36,7 @@ export default function Home({ searchQuery }) {
     try {
       const response = await axios.get('/api/movies/popular');
       setData(response.data);
+      setShowMovies(true);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -91,28 +94,42 @@ export default function Home({ searchQuery }) {
         </p>
       ) : null}
 
-      <div className="searched-person-list">
-        <Personcard
-          data={people}
-        />
-      </div>
+      {showMovies && !showProfile && (
+        <>
+          <div className="searched-person-list">
+            <Personcard
+              data={people}
+            />
+          </div>
 
-      <div className="searched-movies-list">
-        <Moviecard
-          data={movies}
-          genres={genres}
-        />
-      </div>
+          <div className="searched-movies-list">
+            <Moviecard
+              data={movies}
+              genres={genres}
+            />
+          </div>
 
-      <div className="movieList">
-        <h1>Popular Movies</h1>
-
-        <Moviecard
-          data={data}
-          genres={genres}
-        />
-        
-      </div>
+          <div className="movieList">
+            <h1>Popular Movies</h1>
+            <Moviecard
+              data={data}
+              genres={genres}
+            />
+          </div>
+        </>
+      )}
+      
+      {showProfile && 
+        user ? ( 
+          <Profilepage 
+            user={user}
+          />
+        ) : (
+          <p className="profilepage-error">
+            Käyttäjätietoja ei voitu ladata
+          </p>
+        )
+      }
 
     </Container>
   )

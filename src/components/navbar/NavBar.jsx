@@ -9,15 +9,18 @@ export default function NavBar({
   searchQuery,
   setSearchQuery,
   onLoginClick,
-  searchOption,
-  setSearchOption,
   user,
-  onLogout
+  onLogout,
+  setShowProfile
 }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  function toggleVisibility() {
+      setShowProfile((currentlyVisible) => !currentlyVisible);
+  } 
 
   return (
     <BsNavbar
@@ -56,7 +59,7 @@ export default function NavBar({
             {user ? (
               <div className="d-flex align-items-center gap-2">
 
-                <span className="text-white">
+                <span className="text-white" onClick={toggleVisibility}>
                   Tervetuloa, {user.username}
                 </span>
 

@@ -20,6 +20,7 @@ function App() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [loginMode, setLoginMode] = useState('login');
+  const [showProfile, setShowProfile] = useState(false);
 
   const openLogin = (mode = 'login') => {
     setLoginMode(mode);
@@ -51,7 +52,7 @@ function App() {
   };
 
   return (
-  <Container fluid="xl">
+  <Container fluid="xl" className="d-flex flex-column min-vh-100">
 
     <Row>
       <Col>
@@ -61,6 +62,7 @@ function App() {
           onLoginClick={() => openLogin('login')}
           user={user}
           onLogout={handleLogout}
+          setShowProfile={setShowProfile}
         />
       </Col>
     </Row>
@@ -83,12 +85,14 @@ function App() {
       <Col xs={12} md={9} lg={10}>
         <Home
           searchQuery={searchQuery}
+          user={user}
+          showProfile={showProfile}
         />
       </Col>
 
     </Row>
 
-    <Row>
+    <Row className="mt-auto">
       <Col>
         <Footer/>
       </Col>
@@ -132,7 +136,7 @@ function App() {
     />
 
   </Container>
-)
+  );
 }
 
 export default App
